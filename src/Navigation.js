@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator, HeaderBackButton } from '@react-navigation/stack';
+import { createStackNavigator, HeaderBackButton, CardStyleInterpolators } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import MenuAlarmes from './Screens/MenuAlarmes'
@@ -29,15 +29,19 @@ export default class App extends Component {
         return (
             <NavigationContainer >
                 <Stack.Navigator
+                    mode={'card'}
                     screenOptions={{
+                        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
                         headerTransparent: true,
+                        animationEnabled: false,
                         headerStyle: {
                             height: 50,
+                            backgroundColor: 'black',
                         },
                         headerTintColor: '#fff',
                     }}
                     initialRouteName='Alarmes'>
-                    <Stack.Screen name="Alarmes" component={AppDrawer}
+                    <Stack.Screen name="Alarmes" component={MenuAlarmes}
                         options={({ route }) => ({
                             headerTitleStyle: {
                                 fontFamily: CommonStyles.fontFamilyTitle,

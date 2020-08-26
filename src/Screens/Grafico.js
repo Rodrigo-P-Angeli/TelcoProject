@@ -12,11 +12,11 @@ const data2 = [50, 10, 10, 120, -4, -24, -23, 21, 35, 53, 13, 24, 50, -20, -80]
 const data = [
     {
         data: data1,
-        svg: { stroke: 'red' },
+        svg: { stroke: 'red', strokeWidth: 2, },
     },
     {
         data: data2,
-        svg: { stroke: 'green' },
+        svg: { stroke: 'green', strokeWidth: 2, },
     },
 ]
 
@@ -33,7 +33,7 @@ export default class Grafico extends Component {
                     data={data}
                     contentInset={{ top: 20, bottom: 20 }}
                 >
-                    <Grid svg={{ stroke: 'white', strokeWidth: 0.2, }} />
+                    <Grid svg={{ stroke: 'white', strokeWidth: 0.4, }} />
                 </LineChart>
             </LinearGradient>
         )
@@ -43,7 +43,7 @@ export default class Grafico extends Component {
 const styles = StyleSheet.create({
     linearGradient: {
         flex: 1,
-        paddingTop: 50,
+        paddingTop: 80,
         justifyContent: 'center'
     },
     chart: {

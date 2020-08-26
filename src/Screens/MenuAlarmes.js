@@ -44,7 +44,7 @@ export default class MenuAlarm extends Component {
                 id_object: 3,
                 start: 0,
                 end: 1,
-                id_priority: 0,
+                id_priority: 3,
                 alarm_name: 'Alarme4',
                 object_name: 'Objeto1',
                 type: 'Dispositivo',
@@ -73,7 +73,7 @@ export default class MenuAlarm extends Component {
 const styles = StyleSheet.create({
     linearGradient: {
         flex: 1,
-        paddingTop: 50,
+        paddingTop: 80,
     },
     flatlist: {
         padding: 5,
