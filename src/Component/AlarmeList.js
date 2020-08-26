@@ -1,11 +1,10 @@
 import React from 'react'
-import { View, StyleSheet, ScrollView, Text } from 'react-native'
+import { View, StyleSheet, ScrollView, Text, TouchableOpacity } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
-import { TouchableOpacity } from 'react-native-gesture-handler'
 
 export const AlarmList = props => {
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={() => props.navigation.navigate('Grafico', props)}>
             <Text>{props.alarm_name}</Text>
             <Text>{props.start}</Text>
             <Text>{props.type}</Text>

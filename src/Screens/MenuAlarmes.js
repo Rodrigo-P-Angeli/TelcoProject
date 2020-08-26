@@ -27,7 +27,7 @@ export default class MenuAlarm extends Component {
                     <FlatList
                         data={this.state.alarmes}
                         keyExtractor={item => `${item.id_object}`}
-                        renderItem={({ item }) => <AlarmList {...item} />}
+                        renderItem={({ item }) => <AlarmList {...item} {...this.props} />}
                         style={styles.flatlist}
                     />
                     <TouchableOpacity style={styles.addButton}>
