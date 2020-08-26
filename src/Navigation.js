@@ -23,14 +23,8 @@ export default class App extends Component {
                             alignSelf: 'center',
                             fontSize: 20,
                         },
-                    }
-                    }
-                >
-                    <Stack.Screen
-                        options={{
-                            title: 'Alarmes',
-                        }}
-                        name="Alarmes">
+                    }}>
+                    <Stack.Screen name="Alarmes">
                         {() => <MenuAlarmes />}
                     </Stack.Screen>
                 </Stack.Navigator>
