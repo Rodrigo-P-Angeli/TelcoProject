@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, ScrollView, FlatList, TouchableOpacity, Text, LogBox } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import { LineChart, Grid } from 'react-native-svg-charts'
 
 LogBox.ignoreLogs([
     'Non-serializable values were found in the navigation state',
 ]);
+
+const data = [50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80]
+
 export default class Grafico extends Component {
     render() {
         return (
@@ -13,6 +16,14 @@ export default class Grafico extends Component {
                 <Text>
                     <Text>{this.props.route.params.alarm_name}</Text>
                 </Text>
+                <LineChart
+                    style={{ height: 200 }}
+                    data={data}
+                    svg={{ stroke: 'rgb(134, 65, 244)' }}
+                    contentInset={{ top: 20, bottom: 20 }}
+                >
+                    <Grid />
+                </LineChart>
             </LinearGradient>
         )
     }

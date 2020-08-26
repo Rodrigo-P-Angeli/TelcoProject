@@ -11,7 +11,7 @@ const Stack = createStackNavigator();
 export default class App extends Component {
     render() {
         return (
-            <NavigationContainer>
+            <NavigationContainer >
                 <Stack.Navigator
                     screenOptions={{
                         headerTransparent: true,
@@ -26,12 +26,16 @@ export default class App extends Component {
                         },
                     }}
                     initialRouteName='Alarmes'>
-                    <Stack.Screen name="Alarmes">
-                        {(props) => <MenuAlarmes {...props} />}
-                    </Stack.Screen>
-                    <Stack.Screen name="Grafico">
-                        {(props) => <Grafico {...props} />}
-                    </Stack.Screen>
+                    <Stack.Screen name="Alarmes" options={
+                        {
+                            gestureDirection: 'horizontal'
+                        }
+                    } component={MenuAlarmes} />
+                    <Stack.Screen name="Grafico" options={
+                        {
+                            gestureDirection: 'horizontal'
+                        }
+                    } component={Grafico} />
                 </Stack.Navigator>
             </NavigationContainer >
         )
