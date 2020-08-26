@@ -26,16 +26,8 @@ export default class App extends Component {
                         },
                     }}
                     initialRouteName='Alarmes'>
-                    <Stack.Screen name="Alarmes" options={
-                        {
-                            gestureDirection: 'horizontal'
-                        }
-                    } component={MenuAlarmes} />
-                    <Stack.Screen name="Grafico" options={
-                        {
-                            gestureDirection: 'horizontal'
-                        }
-                    } component={Grafico} />
+                    <Stack.Screen name="Alarmes" component={MenuAlarmes} />
+                    <Stack.Screen name="Grafico" component={Grafico} />
                 </Stack.Navigator>
             </NavigationContainer >
         )
