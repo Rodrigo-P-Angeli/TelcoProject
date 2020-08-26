@@ -38,5 +38,5 @@ const styles = StyleSheet.create({
         height: 200,
         width: '80%', 
         alignSelf: 'center'
-    }
+    },
 })
