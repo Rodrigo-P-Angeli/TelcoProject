@@ -17,7 +17,7 @@ export default class Grafico extends Component {
                     <Text>{this.props.route.params.alarm_name}</Text>
                 </Text>
                 <LineChart
-                    style={{ height: 200 }}
+                    style={styles.chart}
                     data={data}
                     svg={{ stroke: 'rgb(134, 65, 244)' }}
                     contentInset={{ top: 20, bottom: 20 }}
@@ -34,4 +34,9 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingTop: 50,
     },
+    chart: {
+        height: 200,
+        width: '80%', 
+        alignSelf: 'center'
+    }
 })
