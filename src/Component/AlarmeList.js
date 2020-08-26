@@ -4,19 +4,22 @@ import LinearGradient from 'react-native-linear-gradient'
 import Prioridade from '../Prioridade'
 import CommonStyles from '../CommonStyles'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import { FadeInView } from './FadeInView';
 
 export const AlarmList = props => {
     return (
-        <TouchableOpacity activeOpacity={.5} style={styles.container} onPress={() => props.navigation.navigate('Grafico', props)}>
-            <View style={[styles.prioridade, { backgroundColor: Prioridade[props.id_priority].background_color }]}></View>
-            <Text style={[styles.text, { color: Prioridade[props.id_priority].text_color }]}>{props.alarm_name}</Text>
-            <View style={styles.startEnd}>
-                <Text style={[styles.startEndText, { color: Prioridade[props.id_priority].text_color }]}>{props.start}</Text>
-                <Text style={[styles.startEndText, { color: Prioridade[props.id_priority].text_color }]}>{props.end}</Text>
-            </View>
-            {/* 
+        <FadeInView>
+            <TouchableOpacity activeOpacity={.5} style={styles.container} onPress={() => props.navigation.navigate('Grafico', props)}>
+                <View style={[styles.prioridade, { backgroundColor: Prioridade[props.id_priority].background_color }]}></View>
+                <Text style={[styles.text, { color: Prioridade[props.id_priority].text_color }]}>{props.alarm_name}</Text>
+                <View style={styles.startEnd}>
+                    <Text style={[styles.startEndText, { color: Prioridade[props.id_priority].text_color }]}>{props.start}</Text>
+                    <Text style={[styles.startEndText, { color: Prioridade[props.id_priority].text_color }]}>{props.end}</Text>
+                </View>
+                {/* 
             <Text>{props.type}</Text> */}
-        </TouchableOpacity>
+            </TouchableOpacity>
+        </FadeInView>
     )
 }
 
@@ -46,7 +49,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
         flex: 1,
     },
-    startEndText:{
+    startEndText: {
         fontFamily: CommonStyles.fontFamily,
         fontSize: 11,
     }

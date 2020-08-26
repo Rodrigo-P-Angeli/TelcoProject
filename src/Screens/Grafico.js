@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, ScrollView, FlatList, TouchableOpacity, Text, LogBox } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
-import { LineChart, Grid } from 'react-native-svg-charts'
+import { LineChart, Grid, YAxis, XAxis } from 'react-native-svg-charts'
 
 LogBox.ignoreLogs([
     'Non-serializable values were found in the navigation state',
@@ -28,13 +28,32 @@ export default class Grafico extends Component {
     render() {
         return (
             <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#050055', '#000594']} style={styles.linearGradient}>
-                <LineChart
-                    style={styles.chart}
-                    data={data}
+                <View style={{ height: 200, flexDirection: 'row', alignSelf: 'center' }}>
+                    <YAxis
+                        data={data1}
+                        contentInset={{ top: 20, bottom: 20 }}
+                        svg={{
+                            fill: 'grey',
+                            fontSize: 10,
+                        }}
+                        numberOfTicks={10}
+                        formatLabel={(value) => `${value}ºC`}
+                    />
+                    <LineChart
+                        style={styles.chart}
+                        data={data}
+                        contentInset={{ top: 20, bottom: 20 }}
+                    >
+                        <Grid svg={{ stroke: 'white', strokeWidth: 0.4, }} />
+                    </LineChart>
+                </View>
+                <XAxis
+                    style={{ marginHorizontal: -10 }}
+                    data={data1}
+                    formatLabel={(value, index) => value}
                     contentInset={{ top: 20, bottom: 20 }}
-                >
-                    <Grid svg={{ stroke: 'white', strokeWidth: 0.4, }} />
-                </LineChart>
+                    svg={{ fontSize: 10, fill: 'black' }}
+                />
             </LinearGradient>
         )
     }
@@ -43,7 +62,7 @@ export default class Grafico extends Component {
 const styles = StyleSheet.create({
     linearGradient: {
         flex: 1,
-        paddingTop: 80,
+        ///paddingTop: 50,
         justifyContent: 'center'
     },
     chart: {

@@ -1,60 +1,62 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, FlatList, TouchableOpacity, Text } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 import { AlarmList } from '../Component/AlarmeList'
 import CommonStyles from '../CommonStyles'
 
+const alarmes = [
+    {
+        id_alarm: 0,
+        id_object: 0,
+        start: Math.floor(Math.random() * +new Date() / 1000),
+        end: Math.floor(Math.random() * +new Date() / 1000),
+        id_priority: 0,
+        alarm_name: 'Alarme1',
+        object_name: 'Objeto1',
+        type: 'Dispositivo',
+    },
+    {
+        id_alarm: 1,
+        id_object: 1,
+        start: Math.floor(Math.random() * +new Date() / 1000),
+        end: Math.floor(Math.random() * +new Date() / 1000),
+        id_priority: 1,
+        alarm_name: 'Alarme2',
+        object_name: 'Objeto1',
+        type: 'Dispositivo',
+    },
+    {
+        id_alarm: 2,
+        id_object: 2,
+        start: Math.floor(Math.random() * +new Date() / 1000),
+        end: Math.floor(Math.random() * +new Date() / 1000),
+        id_priority: 2,
+        alarm_name: 'Alarme3',
+        object_name: 'Objeto1',
+        type: 'Dispositivo',
+    },
+    {
+        id_alarm: 3,
+        id_object: 3,
+        start: Math.floor(Math.random() * +new Date() / 1000),
+        end: Math.floor(Math.random() * +new Date() / 1000),
+        id_priority: 3,
+        alarm_name: 'Alarme4',
+        object_name: 'Objeto1',
+        type: 'Dispositivo',
+    },
+]
 export default class MenuAlarm extends Component {
     state = {
-        alarmes: [
-            {
-                id_alarm: 0,
-                id_object: 0,
-                start: 0,
-                end: 1,
-                id_priority: 0,
-                alarm_name: 'Alarme1',
-                object_name: 'Objeto1',
-                type: 'Dispositivo',
-            },
-            {
-                id_alarm: 1,
-                id_object: 1,
-                start: 0,
-                end: 1,
-                id_priority: 1,
-                alarm_name: 'Alarme2',
-                object_name: 'Objeto1',
-                type: 'Dispositivo',
-            },
-            {
-                id_alarm: 2,
-                id_object: 2,
-                start: 0,
-                end: 1,
-                id_priority: 2,
-                alarm_name: 'Alarme3',
-                object_name: 'Objeto1',
-                type: 'Dispositivo',
-            },
-            {
-                id_alarm: 3,
-                id_object: 3,
-                start: 0,
-                end: 1,
-                id_priority: 3,
-                alarm_name: 'Alarme4',
-                object_name: 'Objeto1',
-                type: 'Dispositivo',
-            },
-        ]
+        alarmes,
     }
     render() {
         return (
             <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#050055', '#000594']} style={styles.linearGradient}>
                 <View style={{ flex: 1 }}>
+                    <Text>{Math.floor(+new Date() / 1000)}</Text>
                     <FlatList
                         data={this.state.alarmes}
                         keyExtractor={item => `${item.id_object}`}
@@ -73,7 +75,7 @@ export default class MenuAlarm extends Component {
 const styles = StyleSheet.create({
     linearGradient: {
         flex: 1,
-        paddingTop: 80,
+        paddingTop: 50,
     },
     flatlist: {
         padding: 5,
