@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import MenuAlarmes from './Screens/MenuAlarmes'
+import CommonStyles from './CommonStyles';
 //import Header from './Components/Header'
 
 const Stack = createStackNavigator();
@@ -18,7 +19,9 @@ export default class App extends Component {
                         headerTransparent: true,
                         headerTintColor: '#fff',
                         headerTitleStyle: {
-                            fontWeight: 'bold',
+                            fontFamily: CommonStyles.fontFamilyTitle,
+                            alignSelf: 'center',
+                            fontSize: 20,
                         },
                     }
                     }
