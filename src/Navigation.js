@@ -9,7 +9,7 @@ export default class App extends Component {
         return (
             <NavigationContainer>
                 <Stack.Navigator headerMode='float'>
-                    <Stack.Screen>
+                    <Stack.Screen name="TelcoProject">
                         {() => { }}
                     </Stack.Screen>
                 </Stack.Navigator>
