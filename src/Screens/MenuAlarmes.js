@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, ScrollView, FlatList, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 import { AlarmList } from '../Component/AlarmeList'
+import CommonStyles from '../CommonStyles'
 
 export default class MenuAlarm extends Component {
     state = {
@@ -17,12 +18,42 @@ export default class MenuAlarm extends Component {
                 alarm_name: 'Alarme1',
                 object_name: 'Objeto1',
                 type: 'Dispositivo',
-            }
+            },
+            {
+                id_alarm: 1,
+                id_object: 1,
+                start: 0,
+                end: 1,
+                id_priority: 1,
+                alarm_name: 'Alarme2',
+                object_name: 'Objeto1',
+                type: 'Dispositivo',
+            },
+            {
+                id_alarm: 2,
+                id_object: 2,
+                start: 0,
+                end: 1,
+                id_priority: 2,
+                alarm_name: 'Alarme3',
+                object_name: 'Objeto1',
+                type: 'Dispositivo',
+            },
+            {
+                id_alarm: 3,
+                id_object: 3,
+                start: 0,
+                end: 1,
+                id_priority: 0,
+                alarm_name: 'Alarme4',
+                object_name: 'Objeto1',
+                type: 'Dispositivo',
+            },
         ]
     }
     render() {
         return (
-            <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#2b2680', '#3393a7']} style={styles.linearGradient}>
+            <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#050055', '#000594']} style={styles.linearGradient}>
                 <View style={{ flex: 1 }}>
                     <FlatList
                         data={this.state.alarmes}
@@ -47,6 +78,7 @@ const styles = StyleSheet.create({
     flatlist: {
         padding: 5,
         flex: 1,
+        paddingTop: 30,
     },
     addButton: {
         position: 'absolute',
@@ -57,6 +89,6 @@ const styles = StyleSheet.create({
         borderRadius: 25,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#2b2680'
+        backgroundColor: CommonStyles.Colors.addButton,
     },
 })
