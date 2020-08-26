@@ -3,7 +3,7 @@ import { View, StyleSheet, ScrollView, Text } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
-export const MenuAlarm = props => {
+export const AlarmList = props => {
     return (
         <TouchableOpacity style={styles.container}>
             <Text>{props.alarm_name}</Text>
@@ -13,6 +13,6 @@ export const MenuAlarm = props => {
 
 const styles = StyleSheet.create({
     container: {
-
+        flex: 1,
     },
 })

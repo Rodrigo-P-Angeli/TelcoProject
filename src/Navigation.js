@@ -4,7 +4,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import MenuAlarmes from './Screens/MenuAlarmes'
 import CommonStyles from './CommonStyles';
-//import Header from './Components/Header'
 
 const Stack = createStackNavigator();
 
@@ -12,11 +11,12 @@ export default class App extends Component {
     render() {
         return (
             <NavigationContainer>
-                <Stack.Navigator headerMode='screen'
-                    headerMode="screen"
-                    mode="modal"
+                <Stack.Navigator
                     screenOptions={{
                         headerTransparent: true,
+                        headerStyle: {
+                            height: 50,
+                        },
                         headerTintColor: '#fff',
                         headerTitleStyle: {
                             fontFamily: CommonStyles.fontFamilyTitle,
@@ -25,7 +25,7 @@ export default class App extends Component {
                         },
                     }}>
                     <Stack.Screen name="Alarmes">
-                        {() => <MenuAlarmes />}
+                        {(props) => <MenuAlarmes {...props} />}
                     </Stack.Screen>
                 </Stack.Navigator>
             </NavigationContainer >
