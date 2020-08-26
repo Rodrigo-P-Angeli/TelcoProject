@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, ScrollView, FlatList } from 'react-native'
+import { View, StyleSheet, ScrollView, FlatList, TouchableOpacity } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 import { AlarmList } from '../Component/AlarmeList'
 
@@ -22,12 +23,17 @@ export default class MenuAlarm extends Component {
     render() {
         return (
             <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#2b2680', '#3393a7']} style={styles.linearGradient}>
+                <View style={{ flex: 1 }}>
                     <FlatList
                         data={this.state.alarmes}
-                        keyExtractor={item => item.id_object}
+                        keyExtractor={item => `${item.id_object}`}
                         renderItem={({ item }) => <AlarmList {...item} />}
                         style={styles.flatlist}
                     />
+                    <TouchableOpacity style={styles.addButton}>
+                        <Icon name={'plus'} size={20} color={'white'} />
+                    </TouchableOpacity>
+                </View>
             </LinearGradient>
         )
     }
@@ -40,5 +46,17 @@ const styles = StyleSheet.create({
     },
     flatlist: {
         padding: 5,
-    }
+        flex: 1,
+    },
+    addButton: {
+        position: 'absolute',
+        right: 30,
+        bottom: 30,
+        width: 50,
+        height: 50,
+        borderRadius: 25,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#2b2680'
+    },
 })

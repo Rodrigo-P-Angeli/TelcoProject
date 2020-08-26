@@ -7,6 +7,9 @@ export const AlarmList = props => {
     return (
         <TouchableOpacity style={styles.container}>
             <Text>{props.alarm_name}</Text>
+            <Text>{props.start}</Text>
+            <Text>{props.type}</Text>
+            <Text>{props.id_priority}</Text>
         </TouchableOpacity>
     )
 }
