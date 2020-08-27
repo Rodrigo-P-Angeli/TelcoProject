@@ -1,59 +1,57 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, ScrollView, FlatList, TouchableOpacity, Text, LogBox } from 'react-native'
+import { View, StyleSheet, ScrollView, FlatList, TouchableOpacity, Text, LogBox, Button, ActivityIndicator } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
-import { LineChart, Grid, YAxis, XAxis } from 'react-native-svg-charts'
+import * as dateFns from 'date-fns'
+
+import { Chart } from '../Component/Charts'
 
 LogBox.ignoreLogs([
     'Non-serializable values were found in the navigation state',
 ]);
 
-const data1 = [50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80]
-const data2 = [50, 10, 10, 120, -4, -24, -23, 21, 35, 53, 13, 24, 50, -20, -80]
-const data = [
-    {
-        data: data1,
-        svg: { stroke: 'red', strokeWidth: 2, },
-    },
-    {
-        data: data2,
-        svg: { stroke: 'green', strokeWidth: 2, },
-    },
-]
-
-
+const initialState = {
+    entrada: [],
+    saida: [],
+    time: [],
+    loading: true,
+}
 export default class Grafico extends Component {
-    static navigationOptions = {
-        title: 'Home',
-    };
+    state = {
+        ...initialState
+    }
+    async componentDidMount() {
+        let entrada = this.generatePoints(30)
+        let saida = this.generatePoints(40)
+        let time = this.generateTime()
+        setTimeout(() => this.setState({
+            entrada,
+            saida,
+            time,
+            loading: false,
+        }), 1);
+    }
+    generatePoints(padrao) {
+        const dado = []
+        for (let i = 0; i < 288; i++) {
+            dado.push(padrao + Math.round(Math.random().toFixed(2) * 5))
+        }
+        return dado
+    }
+    generateTime() {
+        const dado = []
+        const agora = new Date()
+        for (let i = 0; i < 288; i++) {
+            if ((i + 32) % 32 == 0) {
+                let hora = dateFns.addHours(agora, -(288 - i) / 288 * 24)
+                dado[i] = dateFns.format(hora, 'HH:mm')
+            }
+        }
+        return dado
+    }
     render() {
         return (
             <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#050055', '#000594']} style={styles.linearGradient}>
-                <View style={{ height: 200, flexDirection: 'row', alignSelf: 'center' }}>
-                    <YAxis
-                        data={data1}
-                        contentInset={{ top: 20, bottom: 20 }}
-                        svg={{
-                            fill: 'grey',
-                            fontSize: 10,
-                        }}
-                        numberOfTicks={10}
-                        formatLabel={(value) => `${value}ºC`}
-                    />
-                    <LineChart
-                        style={styles.chart}
-                        data={data}
-                        contentInset={{ top: 20, bottom: 20 }}
-                    >
-                        <Grid svg={{ stroke: 'white', strokeWidth: 0.4, }} />
-                    </LineChart>
-                </View>
-                <XAxis
-                    style={{ marginHorizontal: -10 }}
-                    data={data1}
-                    formatLabel={(value, index) => value}
-                    contentInset={{ top: 20, bottom: 20 }}
-                    svg={{ fontSize: 10, fill: 'black' }}
-                />
+                <Chart entrada={this.state.entrada} saida={this.state.saida} time={this.state.time} loading={this.state.loading} />
             </LinearGradient>
         )
     }
@@ -62,12 +60,29 @@ export default class Grafico extends Component {
 const styles = StyleSheet.create({
     linearGradient: {
         flex: 1,
-        ///paddingTop: 50,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'blue',
     },
     chart: {
-        height: 200,
+        height: 300,
         width: '80%',
         alignSelf: 'center',
     },
+    ActInd: {
+        alignSelf: 'center'
+    },
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#999',
+    },
+    //scrowview:
+    // {
+    //     alignSelf: 'center',
+    //     flexDirection: 'row',
+    //     marginTop: 150,
+    //     marginRight: 30,
+    // }
 })

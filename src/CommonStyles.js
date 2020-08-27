@@ -4,6 +4,6 @@ export default {
     fontFamilyTitle: 'Roboto-Bold',
     Colors: {
         white: '#FFF',
-        addButton: '#2b2680',
+        addButton: '#050055',
     }
 }

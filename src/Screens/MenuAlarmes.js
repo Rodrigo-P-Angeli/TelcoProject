@@ -56,7 +56,6 @@ export default class MenuAlarm extends Component {
         return (
             <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#050055', '#000594']} style={styles.linearGradient}>
                 <View style={{ flex: 1 }}>
-                    <Text>{Math.floor(+new Date() / 1000)}</Text>
                     <FlatList
                         data={this.state.alarmes}
                         keyExtractor={item => `${item.id_object}`}
