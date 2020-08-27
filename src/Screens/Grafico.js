@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, ScrollView, FlatList, TouchableOpacity, Text, LogBox, Button, ActivityIndicator } from 'react-native'
+import { StyleSheet, LogBox} from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import * as dateFns from 'date-fns'
 
@@ -81,11 +81,4 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#999',
     },
-    //scrowview:
-    // {
-    //     alignSelf: 'center',
-    //     flexDirection: 'row',
-    //     marginTop: 150,
-    //     marginRight: 30,
-    // }
 })
