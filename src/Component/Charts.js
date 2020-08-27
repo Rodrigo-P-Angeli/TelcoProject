@@ -16,7 +16,10 @@ const chartConfig = {
     color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
     strokeWidth: 2, // optional, default 3
     barPercentage: 0.5,
-    useShadowColorFromDataset: false // optional
+    useShadowColorFromDataset: false, // optional
+    style: {
+        paddingRight: 100,
+    },
 };
 
 
@@ -48,9 +51,14 @@ export const Chart = props => {
             <FadeInView>
                 <LineChart
                     data={data}
-                    width={screenWidth * 0.9}
+                    width={screenWidth*.95}
                     height={220}
                     chartConfig={chartConfig}
+                    withDots={false}
+                    withVerticalLines={false}
+                    verticalLabelRotation={90}
+                    xLabelsOffset={-20}
+                    bezier
                 />
             </FadeInView>
         )
@@ -65,5 +73,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        
     },
 })

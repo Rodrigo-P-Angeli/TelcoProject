@@ -39,9 +39,12 @@ export default class Grafico extends Component {
     }
     generateTime() {
         const dado = []
-        const agora = new Date()
+        const date = new Date()
+        const coff = 1000 * 60 * 5
+        const agora = Math.round(date.getTime() / coff) * coff
         for (let i = 0; i < 288; i++) {
-            if ((i + 32) % 32 == 0) {
+            if ((i + 32) % 32 == 0 || i == 287) {
+
                 let hora = dateFns.addHours(agora, -(288 - i) / 288 * 24)
                 dado[i] = dateFns.format(hora, 'HH:mm')
             }
