@@ -33,7 +33,7 @@ export default class App extends Component {
                     screenOptions={{
                         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
                         headerTransparent: true,
-                        animationEnabled: false,
+                        //animationEnabled: false,
                         headerStyle: {
                             height: 50,
                             backgroundColor: 'black',

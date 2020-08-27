@@ -1,10 +1,12 @@
 import React from 'react'
 import { View, StyleSheet, ScrollView, Text, } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
-import Prioridade from '../Prioridade'
-import CommonStyles from '../CommonStyles'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { FadeInView } from './FadeInView';
+import * as dateFns from 'date-fns'
+
+import Prioridade from '../Prioridade'
+import CommonStyles from '../CommonStyles'
 
 export const AlarmList = props => {
     return (
@@ -13,8 +15,8 @@ export const AlarmList = props => {
                 <View style={[styles.prioridade, { backgroundColor: Prioridade[props.id_priority].background_color }]}></View>
                 <Text style={[styles.text, { color: Prioridade[props.id_priority].text_color }]}>{props.alarm_name}</Text>
                 <View style={styles.startEnd}>
-                    <Text style={[styles.startEndText, { color: Prioridade[props.id_priority].text_color }]}>{props.start}</Text>
-                    <Text style={[styles.startEndText, { color: Prioridade[props.id_priority].text_color }]}>{props.end}</Text>
+                    <Text style={[styles.startEndText, { color: Prioridade[props.id_priority].text_color }]}>Start: {dateFns.format(props.start, 'dd-MM-yyyy HH:mm')}</Text>
+                    <Text style={[styles.startEndText, { color: Prioridade[props.id_priority].text_color }]}>End: {dateFns.format(props.end, 'dd-MM-yyyy HH:mm')}</Text>
                 </View>
                 {/* 
             <Text>{props.type}</Text> */}

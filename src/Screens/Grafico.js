@@ -31,9 +31,9 @@ export default class Grafico extends Component {
         }), 1);
     }
     generatePoints(padrao) {
-        const dado = []
-        for (let i = 0; i < 288; i++) {
-            dado.push(padrao + Math.round(Math.random().toFixed(2) * 5))
+        const dado = [padrao]
+        for (let i = 1; i < 288; i++) {
+            dado.push(dado[i - 1] + Math.round(Math.random() * 10 - 5)) //Criando um gráfico maneiro
         }
         return dado
     }
