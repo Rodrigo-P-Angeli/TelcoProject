@@ -5,6 +5,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import MenuAlarmes from './Screens/MenuAlarmes'
 import Grafico from './Screens/Grafico'
+import AddAlarm from './Screens/AddAlarm'
 import CommonStyles from './CommonStyles';
 
 const Stack = createStackNavigator();
@@ -56,7 +57,7 @@ export default class App extends Component {
                         })} />
                     <Stack.Screen name="Grafico" component={Grafico}
                         options={({ route }) => ({
-                            title: route.params.alarm_name,
+                            title: route.params.alarmName,
                             headerTitleStyle: {
                                 fontFamily: CommonStyles.fontFamilyTitle,
                                 alignSelf: 'flex-start',
@@ -64,6 +65,15 @@ export default class App extends Component {
                             },
                         })}
                     />
+                    <Stack.Screen name="AddAlarm" component={AddAlarm}
+                        options={({ route }) => ({
+                            title: "AddAlarm",
+                            headerTitleStyle: {
+                                fontFamily: CommonStyles.fontFamilyTitle,
+                                alignSelf: 'flex-start',
+                                fontSize: 20,
+                            },
+                        })} />
                 </Stack.Navigator>
             </NavigationContainer >
         )

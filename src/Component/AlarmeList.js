@@ -12,11 +12,11 @@ export const AlarmList = props => {
     return (
         <FadeInView>
             <TouchableOpacity activeOpacity={.5} style={styles.container} onPress={() => props.navigation.navigate('Grafico', props)}>
-                <View style={[styles.prioridade, { backgroundColor: Prioridade[props.id_priority].background_color }]}></View>
-                <Text style={[styles.text, { color: Prioridade[props.id_priority].text_color }]}>{props.alarm_name}</Text>
+                <View style={[styles.prioridade, { backgroundColor: Prioridade[props.idPriority].background_color }]}></View>
+                <Text style={[styles.text, { color: Prioridade[props.idPriority].text_color }]}>{props.alarmName}</Text>
                 <View style={styles.startEnd}>
-                    <Text style={[styles.startEndText, { color: Prioridade[props.id_priority].text_color }]}>Start: {dateFns.format(props.start, 'dd-MM-yyyy HH:mm')}</Text>
-                    <Text style={[styles.startEndText, { color: Prioridade[props.id_priority].text_color }]}>End: {dateFns.format(props.end, 'dd-MM-yyyy HH:mm')}</Text>
+                    <Text style={[styles.startEndText, { color: Prioridade[props.idPriority].text_color }]}>Start: {dateFns.format(props.start, 'dd-MM-yyyy HH:mm')}</Text>
+                    <Text style={[styles.startEndText, { color: Prioridade[props.idPriority].text_color }]}>End: {props.end ? dateFns.format(props.end, 'dd-MM-yyyy HH:mm'): '   - - -'}</Text>
                 </View>
                 {/* 
             <Text>{props.type}</Text> */}

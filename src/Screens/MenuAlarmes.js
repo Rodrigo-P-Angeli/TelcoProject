@@ -2,49 +2,51 @@ import React, { Component } from 'react'
 import { View, StyleSheet, FlatList, TouchableOpacity, Text } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import * as dateFns from 'date-fns'
+
 
 import { AlarmList } from '../Component/AlarmeList'
 import CommonStyles from '../CommonStyles'
 
 const alarmes = [
     {
-        id_alarm: 0,
-        id_object: 0,
-        start: Math.floor(Math.random() * +new Date() / 1000),
-        end: Math.floor(Math.random() * +new Date() / 1000),
-        id_priority: 0,
-        alarm_name: 'Alarme1',
-        object_name: 'Objeto1',
+        idAlarm: 0,
+        idObject: 0,
+        start: dateFns.addHours(new Date(), Math.random() * 10000 - 5000),
+        end: dateFns.addHours(new Date(), Math.random() * 10000 - 5000),
+        idPriority: 0,
+        alarmName: 'Alarme1',
+        objectName: 'Objeto1',
         type: 'Dispositivo',
     },
     {
-        id_alarm: 1,
-        id_object: 1,
-        start: Math.floor(Math.random() * +new Date() / 1000),
-        end: Math.floor(Math.random() * +new Date() / 1000),
-        id_priority: 1,
-        alarm_name: 'Alarme2',
-        object_name: 'Objeto1',
+        idAlarm: 1,
+        idObject: 1,
+        start: dateFns.addHours(new Date(), Math.random() * 10000 - 5000),
+        end: dateFns.addHours(new Date(), Math.random() * 10000 - 5000),
+        idPriority: 1,
+        alarmName: 'Alarme2',
+        objectName: 'Objeto1',
         type: 'Dispositivo',
     },
     {
-        id_alarm: 2,
-        id_object: 2,
-        start: Math.floor(Math.random() * +new Date() / 1000),
-        end: Math.floor(Math.random() * +new Date() / 1000),
-        id_priority: 2,
-        alarm_name: 'Alarme3',
-        object_name: 'Objeto1',
+        idAlarm: 2,
+        idObject: 2,
+        start: dateFns.addHours(new Date(), Math.random() * 10000 - 5000),
+        end: dateFns.addHours(new Date(), Math.random() * 10000 - 5000),
+        idPriority: 2,
+        alarmName: 'Alarme3',
+        objectName: 'Objeto1',
         type: 'Dispositivo',
     },
     {
-        id_alarm: 3,
-        id_object: 3,
-        start: Math.floor(Math.random() * +new Date() / 1000),
-        end: Math.floor(Math.random() * +new Date() / 1000),
-        id_priority: 3,
-        alarm_name: 'Alarme4',
-        object_name: 'Objeto1',
+        idAlarm: 3,
+        idObject: 3,
+        start: dateFns.addHours(new Date(), Math.random() * 10000 - 5000),
+        end: dateFns.addHours(new Date(), (Math.random() * 10000) - 5000),
+        idPriority: 3,
+        alarmName: 'Alarme4',
+        objectName: 'Objeto1',
         type: 'Dispositivo',
     },
 ]
@@ -52,17 +54,45 @@ export default class MenuAlarm extends Component {
     state = {
         alarmes,
     }
+    onAddAlarme = (start, end, idPrioridade, alarmeName, objectName, tipo, endWasSet) => {
+        let id = this.state.alarmes.length
+        let alarmes = this.state.alarmes
+        if (endWasSet) {
+            alarmes.push({
+                idAlarm: id,
+                idObject: id,
+                start: start,
+                end: end,
+                idPriority: idPrioridade,
+                alarmName: alarmeName,
+                objectName: objectName,
+                type: tipo,
+            })
+        } else {
+            alarmes.push({
+                idAlarm: id,
+                idObject: id,
+                start: start,
+                end: null,
+                idPriority: idPrioridade,
+                alarmName: alarmeName,
+                objectName: objectName,
+                type: tipo,
+            })
+        }
+        this.setState({ alarmes })
+    }
     render() {
         return (
             <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#050055', '#000594']} style={styles.linearGradient}>
                 <View style={{ flex: 1 }}>
                     <FlatList
                         data={this.state.alarmes}
-                        keyExtractor={item => `${item.id_object}`}
+                        keyExtractor={item => `${item.idObject}`}
                         renderItem={({ item }) => <AlarmList {...item} {...this.props} />}
                         style={styles.flatlist}
                     />
-                    <TouchableOpacity style={styles.addButton}>
+                    <TouchableOpacity style={styles.addButton} onPress={() => this.props.navigation.navigate('AddAlarm', this.onAddAlarme)}>
                         <Icon name={'plus'} size={20} color={'white'} />
                     </TouchableOpacity>
                 </View>
