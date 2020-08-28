@@ -7,7 +7,7 @@ import MenuAlarmes from './Screens/MenuAlarmes'
 import Grafico from './Screens/Grafico'
 import AddAlarm from './Screens/AddAlarm'
 import CommonStyles from './CommonStyles';
-
+import { HeaderConfirm } from "./Component/HeaderConfirm";
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -66,13 +66,20 @@ export default class App extends Component {
                         })}
                     />
                     <Stack.Screen name="AddAlarm" component={AddAlarm}
-                        options={({ route }) => ({
+                        options={({ route, navigation }) => ({
                             title: "AddAlarm",
                             headerTitleStyle: {
                                 fontFamily: CommonStyles.fontFamilyTitle,
                                 alignSelf: 'flex-start',
                                 fontSize: 20,
                             },
+                            headerRight: (props) => (
+                                <HeaderConfirm
+                                    navigation={navigation}
+                                    route={route}
+                                    protps={props}
+                                />
+                            )
                         })} />
                 </Stack.Navigator>
             </NavigationContainer >
