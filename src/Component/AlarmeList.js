@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 0.7,
         paddingBottom: 5,
         paddingTop: 20,
-        alignItems: 'center'
+        alignItems: 'center',
     },
     prioridade: {
         marginLeft: 15,
