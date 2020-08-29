@@ -31,7 +31,7 @@ export default class AddAlarm extends Component {
     }
     render() {
         return (
-            <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#000066','#47479F']} style={styles.linearGradient}>
+            <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#000066', '#47479F']} style={styles.linearGradient}>
                 <TextInput
                     style={styles.textInput}
                     placeholder={'Nome do Objeto'}
@@ -83,9 +83,7 @@ export default class AddAlarm extends Component {
                     onRequestClose={() => this.setState({ openStart: false })}>
                     <View style={styles.modalContainer}>
                         <TouchableWithoutFeedback onPress={() => this.setState({ openStart: false })} style={styles.touchableModal}>
-                            <View style={styles.touchableModal}>
-
-                            </View>
+                            <View style={styles.touchableModal}></View>
                         </TouchableWithoutFeedback>
                         <DatePicker
                             date={this.state.start}
@@ -96,9 +94,7 @@ export default class AddAlarm extends Component {
                             style={styles.datePicker}
                         />
                         <TouchableWithoutFeedback onPress={() => this.setState({ openStart: false })} style={styles.touchableModal}>
-                            <View style={styles.touchableModal}>
-
-                            </View>
+                            <View style={styles.touchableModal}></View>
                         </TouchableWithoutFeedback>
                     </View>
                 </Modal>

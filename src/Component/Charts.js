@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Dimensions, ActivityIndicator, StyleSheet } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
+
+import FlashMessage, { showMessage, hideMessage } from "react-native-flash-message";
 
 import {
     LineChart,
@@ -24,6 +26,7 @@ const chartConfig = {
 
 
 export const Chart = props => {
+    const [showDots, setShowDots] = useState(false)
     const data = {
         labels: props.time,
         datasets: [
@@ -49,17 +52,34 @@ export const Chart = props => {
     } else {
         return (
             <FadeInView>
-                <LineChart
-                    data={data}
-                    width={screenWidth*.95}
-                    height={220}
-                    chartConfig={chartConfig}
-                    withDots={false}
-                    withVerticalLines={false}
-                    verticalLabelRotation={90}
-                    xLabelsOffset={-20}
-                    bezier
-                />
+                <View style={styles.view}>
+                    <FlashMessage
+                        position='bottom'
+                        style={[styles.message]}
+                        floating={true}
+                        hideStatusBar={false}
+                    />
+                    <LineChart
+                        data={data}
+                        width={screenWidth * .95}
+                        height={220}
+                        chartConfig={chartConfig}
+                        withDots={showDots}
+                        withVerticalLines={false}
+                        verticalLabelRotation={90}
+                        xLabelsOffset={-20}
+                        yLabelsOffset={20}
+                        bezier
+                        onDataPointClick={({ value, dataset, getColor }) =>
+                            showMessage({
+                                message: 'Valor',
+                                description: `${value.toFixed(2).replace('.', ',')}`,
+                                backgroundColor: getColor(1),
+                                type: 'success'
+                            })
+                        }
+                    />
+                </View>
             </FadeInView>
         )
     }
@@ -70,9 +90,12 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     container: {
-        flex: 1,
-        justifyContent: 'center',
+        marginTop: Dimensions.get('screen').height / 2 - 120,
+    },
+    view: {
         alignItems: 'center',
-        
+    },
+    message: {
+
     },
 })

@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { StyleSheet, LogBox, View, Text, Dimensions } from 'react-native'
+import { StyleSheet, LogBox, View, Text, Dimensions, ScrollView } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import * as dateFns from 'date-fns'
 
 import { Chart } from '../Component/Charts'
 import { FadeInView } from '../Component/FadeInView'
 import CommonStyles from '../CommonStyles'
+import Prioridade from '../Prioridade'
 
 LogBox.ignoreLogs([
     'Non-serializable values were found in the navigation state',
@@ -46,7 +47,6 @@ export default class Grafico extends Component {
         const agora = Math.round(date.getTime() / coff) * coff
         for (let i = 0; i < 288; i++) {
             if ((i + 32) % 32 == 0 || i == 287) {
-
                 let hora = dateFns.addHours(agora, -(288 - i) / 288 * 24)
                 dado[i] = dateFns.format(hora, 'HH:mm')
             }
@@ -54,34 +54,37 @@ export default class Grafico extends Component {
         return dado
     }
     render() {
+        const { idPriority } = this.props.route.params
         return (
             <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#000066', '#47479F']} style={styles.linearGradient}>
-                {this.state.loading ? null :
-                    <FadeInView>
-                        <View style={styles.viewInfoContainer}>
-                            <View style={styles.viewInfo}>
-                                <Text style={styles.text}>
-                                    Nome do objeto: {this.props.route.params.objectName}
-                                </Text>
-                                <Text style={styles.text}>
-                                    Tipo do alarme: {this.props.route.params.type}
-                                </Text>
-                                <Text style={styles.text}>
-                                    Prioridade do alarme: {this.props.route.params.idPriority}
+                <ScrollView 
+                style={styles.container}
+                showsVerticalScrollIndicator={false}>
+                    {this.state.loading ? null :
+                        <FadeInView>
+                            <View style={[styles.prioridadeView, { backgroundColor: Prioridade[idPriority].background_color }]}>
+                                <Text style={[styles.prioridade, { color: Prioridade[idPriority].text_color }]}>
+                                    {Prioridade[idPriority].name}
                                 </Text>
                             </View>
-                            <View style={styles.viewInfoDate}>
-                                <Text style={styles.text}>
-                                    Data de início: {dateFns.format(this.props.route.params.start, 'dd-MM-yyyy HH:mm')}
-                                </Text>
-                                <Text style={styles.text}>
-                                    Data de término: {dateFns.format(this.props.route.params.end, 'dd-MM-yyyy HH:mm')}
-                                </Text>
+                            <View style={styles.viewInfoContainer}>
+                                <View style={styles.viewInfo}>
+                                    <Text style={styles.text}>Nome do objeto:</Text>
+                                    <Text style={styles.text2}>{this.props.route.params.objectName}</Text>
+                                    <Text style={styles.text}>Tipo do alarme:</Text>
+                                    <Text style={styles.text2}>{this.props.route.params.type}</Text>
+                                </View>
+                                <View style={styles.viewInfoDate}>
+                                    <Text style={[styles.text, { textAlign: 'right' }]}>Data de início:</Text>
+                                    <Text style={[styles.text2, { textAlign: 'right' }]}>{dateFns.format(this.props.route.params.start, 'dd-MM-yyyy HH:mm')}</Text>
+                                    <Text style={[styles.text, { textAlign: 'right' }]}>Data de término: </Text>
+                                    <Text style={[styles.text2, { textAlign: 'right' }]}>{this.props.route.params.end ? dateFns.format(this.props.route.params.end, 'dd-MM-yyyy HH:mm'): '- - -'}</Text>
+                                </View>
                             </View>
-                        </View>
-                    </FadeInView>}
-                <Chart entrada={this.state.entrada} saida={this.state.saida} time={this.state.time} loading={this.state.loading} />
-            </LinearGradient>
+                        </FadeInView >}
+                    <Chart entrada={this.state.entrada} saida={this.state.saida} time={this.state.time} loading={this.state.loading} />
+                </ScrollView>
+            </LinearGradient >
         )
     }
 }
@@ -91,7 +94,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        flex: 1,
     },
     chart: {
         height: 300,
@@ -102,10 +104,9 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     container: {
+        marginTop: 60,
+        paddingTop: 60,
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#999',
     },
     viewInfoContainer: {
         alignItems: 'center',
@@ -113,15 +114,34 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         width: Dimensions.get('screen').width,
         padding: 10,
-        marginBottom: 100,
     },
     viewInfoDate: {
-        alignSelf: 'flex-start'
+        alignSelf: 'flex-start',
     },
     text: {
         color: CommonStyles.Colors.white,
         fontFamily: CommonStyles.fontFamily,
         fontSize: 15,
+    },
+    text2: {
+        color: CommonStyles.Colors.white,
+        fontFamily: CommonStyles.fontFamilyTitle,
+        fontSize: 15,
         marginBottom: 20,
-    }
+        paddingLeft: 10,
+    },
+    prioridade: {
+        fontFamily: CommonStyles.fontFamilyTitle,
+        fontSize: 15,
+        textAlign: 'center',
+        textAlignVertical: 'center',
+    },
+    prioridadeView: {
+        width: Dimensions.get('screen').width / 3,
+        alignSelf: 'center',
+        marginBottom: 20,
+        height: 50,
+        borderRadius: 25,
+        justifyContent: 'center',
+    },
 })

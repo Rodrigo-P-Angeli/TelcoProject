@@ -66,7 +66,9 @@ export default class MenuAlarm extends Component {
                 let alarmes = JSON.parse(alarmes2)
                 alarmes.map(item => {
                     item.start = new Date(item.start)
-                    item.end = new Date(item.end)
+                    if (item.end) {
+                        item.end = new Date(item.end)
+                    }
                     return (
                         item
                     )
@@ -162,7 +164,7 @@ export default class MenuAlarm extends Component {
             <Animated.View>
                 <StatusBar barStyle="dark-content" />
                 <SafeAreaView>
-                    <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#000066','#47479F']} style={styles.linearGradient}>
+                    <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#000066', '#47479F']} style={styles.linearGradient}>
                         <SearchComponent
                             clampedScroll={clampedScroll}
                             searchFilter={this.searchFilterFunction} />
