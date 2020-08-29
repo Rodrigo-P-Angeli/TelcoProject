@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import { StyleSheet, LogBox} from 'react-native'
+import { StyleSheet, LogBox, View, Text, Dimensions } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import * as dateFns from 'date-fns'
 
 import { Chart } from '../Component/Charts'
+import { FadeInView } from '../Component/FadeInView'
+import CommonStyles from '../CommonStyles'
 
 LogBox.ignoreLogs([
     'Non-serializable values were found in the navigation state',
@@ -53,7 +55,31 @@ export default class Grafico extends Component {
     }
     render() {
         return (
-            <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#050055', '#000594']} style={styles.linearGradient}>
+            <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#000066', '#47479F']} style={styles.linearGradient}>
+                {this.state.loading ? null :
+                    <FadeInView>
+                        <View style={styles.viewInfoContainer}>
+                            <View style={styles.viewInfo}>
+                                <Text style={styles.text}>
+                                    Nome do objeto: {this.props.route.params.objectName}
+                                </Text>
+                                <Text style={styles.text}>
+                                    Tipo do alarme: {this.props.route.params.type}
+                                </Text>
+                                <Text style={styles.text}>
+                                    Prioridade do alarme: {this.props.route.params.idPriority}
+                                </Text>
+                            </View>
+                            <View style={styles.viewInfoDate}>
+                                <Text style={styles.text}>
+                                    Data de início: {dateFns.format(this.props.route.params.start, 'dd-MM-yyyy HH:mm')}
+                                </Text>
+                                <Text style={styles.text}>
+                                    Data de término: {dateFns.format(this.props.route.params.end, 'dd-MM-yyyy HH:mm')}
+                                </Text>
+                            </View>
+                        </View>
+                    </FadeInView>}
                 <Chart entrada={this.state.entrada} saida={this.state.saida} time={this.state.time} loading={this.state.loading} />
             </LinearGradient>
         )
@@ -65,7 +91,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'blue',
+        flex: 1,
     },
     chart: {
         height: 300,
@@ -81,4 +107,21 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#999',
     },
+    viewInfoContainer: {
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        width: Dimensions.get('screen').width,
+        padding: 10,
+        marginBottom: 100,
+    },
+    viewInfoDate: {
+        alignSelf: 'flex-start'
+    },
+    text: {
+        color: CommonStyles.Colors.white,
+        fontFamily: CommonStyles.fontFamily,
+        fontSize: 15,
+        marginBottom: 20,
+    }
 })
