@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, FlatList, TouchableOpacity, Text } from 'react-native'
+import { View, StyleSheet, FlatList, TouchableOpacity, Text, Alert } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import * as dateFns from 'date-fns'
-
+import AsyncStorage from '@react-native-community/async-storage'
 
 import { AlarmList } from '../Component/AlarmeList'
 import CommonStyles from '../CommonStyles'
@@ -52,9 +52,29 @@ const alarmes = [
 ]
 export default class MenuAlarm extends Component {
     state = {
-        alarmes,
     }
-    onAddAlarme = (start, end, idPrioridade, alarmeName, objectName, tipo, endWasSet) => {
+    componentDidMount = async () => {
+        try {
+            let alarmes2 = await AsyncStorage.getItem('ListaAlarmes')
+            if (alarmes2 !== null) {
+                let alarmes = JSON.parse(alarmes2)
+                alarmes.map(item => {
+                    item.start = new Date(item.start)
+                    item.end = new Date(item.end)
+                    return (
+                        item
+                    )
+                }
+                )
+                this.setState({ alarmes })
+            } else {
+                this.setState({ alarmes })
+            }
+        } catch (e) {
+            Alert.alert('Erro', 'Erro ao carregar list')
+        }
+    }
+    onAddAlarme = async (start, end, idPrioridade, alarmeName, objectName, tipo, endWasSet) => {
         let id = this.state.alarmes.length
         let alarmes = this.state.alarmes
         if (endWasSet) {
@@ -81,6 +101,28 @@ export default class MenuAlarm extends Component {
             })
         }
         this.setState({ alarmes })
+        try {
+            let listaAlarmes = JSON.stringify(this.state.alarmes)
+            await AsyncStorage.setItem('ListaAlarmes', listaAlarmes)
+        } catch (e) {
+            Alert.alert('Erro', 'Erro ao salvar lista')
+        }
+    }
+    onDeleteItem = async (id) => {
+        let alarm = this.state.alarmes
+        let alarmes = []
+        for (let i = 0; i < alarm.length; i++) {
+            if (alarm[i].idObject != id) {
+                alarmes.push(alarm[i])
+            }
+        }
+        this.setState({ alarmes })
+        try {
+            let listaAlarmes = JSON.stringify(this.state.alarmes)
+            await AsyncStorage.setItem('ListaAlarmes', listaAlarmes)
+        } catch (e) {
+            Alert.alert('Erro', 'Erro ao deletar item')
+        }
     }
     render() {
         return (
@@ -89,10 +131,10 @@ export default class MenuAlarm extends Component {
                     <FlatList
                         data={this.state.alarmes}
                         keyExtractor={item => `${item.idObject}`}
-                        renderItem={({ item }) => <AlarmList {...item} {...this.props} />}
+                        renderItem={({ item }) => <AlarmList {...item} {...this.props} deleteItem={this.onDeleteItem} />}
                         style={styles.flatlist}
                     />
-                    <TouchableOpacity style={styles.addButton} onPress={() => this.props.navigation.navigate('AddAlarm', this.onAddAlarme)}>
+                    <TouchableOpacity style={styles.addButton} onPress={() => this.props.navigation.navigate('AddAlarm', { addalarm: this.onAddAlarme })}>
                         <Icon name={'plus'} size={20} color={'white'} />
                     </TouchableOpacity>
                 </View>

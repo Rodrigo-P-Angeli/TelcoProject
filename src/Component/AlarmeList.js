@@ -11,12 +11,17 @@ import CommonStyles from '../CommonStyles'
 export const AlarmList = props => {
     return (
         <FadeInView>
-            <TouchableOpacity activeOpacity={.5} style={styles.container} onPress={() => props.navigation.navigate('Grafico', props)}>
+            <TouchableOpacity
+                activeOpacity={.5}
+                style={styles.container}
+                onPress={() => props.navigation.navigate('Grafico', props)}
+                onLongPress={() => props.deleteItem(props.idObject)}
+            >
                 <View style={[styles.prioridade, { backgroundColor: Prioridade[props.idPriority].background_color }]}></View>
                 <Text style={[styles.text, { color: Prioridade[props.idPriority].text_color }]}>{props.alarmName}</Text>
                 <View style={styles.startEnd}>
                     <Text style={[styles.startEndText, { color: Prioridade[props.idPriority].text_color }]}>Start: {dateFns.format(props.start, 'dd-MM-yyyy HH:mm')}</Text>
-                    <Text style={[styles.startEndText, { color: Prioridade[props.idPriority].text_color }]}>End: {props.end ? dateFns.format(props.end, 'dd-MM-yyyy HH:mm'): '   - - -'}</Text>
+                    <Text style={[styles.startEndText, { color: Prioridade[props.idPriority].text_color }]}>End: {props.end ? dateFns.format(props.end, 'dd-MM-yyyy HH:mm') : '   - - -'}</Text>
                 </View>
                 {/* 
             <Text>{props.type}</Text> */}

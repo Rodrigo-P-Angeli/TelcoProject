@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, FlatList, TouchableOpacity, Text, TextInput, Modal, Alert, TouchableWithoutFeedback } from 'react-native'
+import { View, StyleSheet, FlatList, TouchableOpacity, Text, TextInput, Modal, Alert, TouchableWithoutFeedback, Button } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import DatePicker from 'react-native-date-picker'
 import * as dateFns from 'date-fns'
@@ -7,6 +7,7 @@ import * as dateFns from 'date-fns'
 
 import CommonStyles from '../CommonStyles'
 import Prioridade from '../Prioridade'
+import { HeaderConfirm } from '../Component/HeaderConfirm'
 
 
 export default class AddAlarm extends Component {
@@ -21,22 +22,31 @@ export default class AddAlarm extends Component {
         openEnd: false,
         endWasSet: false,
     }
+    componentDidMount() {
+        this.props.navigation.setOptions({
+            headerRight: () => (
+                <HeaderConfirm {...this.props} addAlarm={() => this.props.route.params.addalarm(this.state.start, this.state.end, this.state.priority, this.state.alarmName, this.state.objectName, this.state.type, this.state.endWasSet)} />
+            ),
+        });
+    }
     render() {
         return (
             <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#050055', '#000594']} style={styles.linearGradient}>
                 <TextInput
                     style={styles.textInput}
-                    placeholder={'Nome do objeto'}
-                    value={this.state.object_name}
+                    placeholder={'Nome do Objeto'}
+                    value={this.state.objectName}
                     onChangeText={objectName => this.setState({ objectName })}
                     autoFocus={true}
-
+                    onSubmitEditing={() => { this.segundoTextInput.focus(); }}
+                    blurOnSubmit={false}
                 />
                 <TextInput
                     style={styles.textInput}
-                    placeholder={'Nome do objeto'}
+                    placeholder={'Nome do Alarme'}
                     value={this.state.alarmName}
                     onChangeText={alarmName => this.setState({ alarmName })}
+                    ref={(input) => { this.segundoTextInput = input; }}
                 />
                 <TouchableOpacity onPress={() => this.setState({ openStart: true })}>
                     <Text style={styles.startEnd}>Start: {dateFns.format(this.state.start, 'dd-MM-yyyy HH:mm')}</Text>
@@ -66,13 +76,6 @@ export default class AddAlarm extends Component {
                         <Text style={[styles.priorityText, this.state.priority == 3 ? { color: Prioridade[3].text_color } : null]}>Level 3</Text>
                     </TouchableOpacity>
                 </View>
-                <TouchableOpacity onPress={() => {
-                    this.props.route.params(this.state.start, this.state.end, this.state.priority, this.state.alarmName, this.state.objectName, this.state.type, this.state.endWasSet)
-                    this.props.navigation.navigate('Alarmes')
-                }
-                }>
-                    <Text>confirme</Text>
-                </TouchableOpacity>
                 <Modal
                     animationType='fade'
                     transparent={true}
