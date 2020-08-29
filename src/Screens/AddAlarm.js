@@ -31,7 +31,7 @@ export default class AddAlarm extends Component {
     }
     render() {
         return (
-            <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#050055', '#000594']} style={styles.linearGradient}>
+            <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#000066','#47479F']} style={styles.linearGradient}>
                 <TextInput
                     style={styles.textInput}
                     placeholder={'Nome do Objeto'}
