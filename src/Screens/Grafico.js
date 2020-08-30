@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, LogBox, View, Text, Dimensions, ScrollView } from 'react-native'
+import { StyleSheet, LogBox, View, Text, Dimensions, ScrollView, Switch, ActivityIndicator } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import * as dateFns from 'date-fns'
 
@@ -17,10 +17,11 @@ const initialState = {
     saida: [],
     time: [],
     loading: true,
+    withDots: false,
 }
 export default class Grafico extends Component {
     state = {
-        ...initialState
+        ...initialState,
     }
     async componentDidMount() {
         let entrada = this.generatePoints(30)
@@ -57,9 +58,9 @@ export default class Grafico extends Component {
         const { idPriority } = this.props.route.params
         return (
             <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#000066', '#47479F']} style={styles.linearGradient}>
-                <ScrollView 
-                style={styles.container}
-                showsVerticalScrollIndicator={false}>
+                <ScrollView
+                    style={styles.container}
+                    showsVerticalScrollIndicator={false}>
                     {this.state.loading ? null :
                         <FadeInView>
                             <View style={[styles.prioridadeView, { backgroundColor: Prioridade[idPriority].background_color }]}>
@@ -78,11 +79,19 @@ export default class Grafico extends Component {
                                     <Text style={[styles.text, { textAlign: 'right' }]}>Data de início:</Text>
                                     <Text style={[styles.text2, { textAlign: 'right' }]}>{dateFns.format(this.props.route.params.start, 'dd-MM-yyyy HH:mm')}</Text>
                                     <Text style={[styles.text, { textAlign: 'right' }]}>Data de término: </Text>
-                                    <Text style={[styles.text2, { textAlign: 'right' }]}>{this.props.route.params.end ? dateFns.format(this.props.route.params.end, 'dd-MM-yyyy HH:mm'): '- - -'}</Text>
+                                    <Text style={[styles.text2, { textAlign: 'right' }]}>{this.props.route.params.end ? dateFns.format(this.props.route.params.end, 'dd-MM-yyyy HH:mm') : '- - -'}</Text>
                                 </View>
                             </View>
+                            <Switch
+                                trackColor={{ false: "#767577", true: "#81b0ff" }}
+                                thumbColor={this.state.withDots ? "#f5dd4b" : "#f4f3f4"}
+                                ios_backgroundColor="#3e3e3e"
+                                onValueChange={(value) => this.setState({ withDots: value })}
+                                value={this.state.withDots}
+                            />
+                            <Text style={styles.textSwitch}>Mostrar pontos</Text>
                         </FadeInView >}
-                    <Chart entrada={this.state.entrada} saida={this.state.saida} time={this.state.time} loading={this.state.loading} />
+                    <Chart entrada={this.state.entrada} saida={this.state.saida} time={this.state.time} loading={this.state.loading} withDots={this.state.withDots} />
                 </ScrollView>
             </LinearGradient >
         )
@@ -143,5 +152,12 @@ const styles = StyleSheet.create({
         height: 50,
         borderRadius: 25,
         justifyContent: 'center',
+    },
+    textSwitch: {
+        fontFamily: CommonStyles.fontFamily,
+        color: CommonStyles.Colors.white,
+        fontSize: 10,
+        textAlign: 'right',
+        marginRight: 10,
     },
 })

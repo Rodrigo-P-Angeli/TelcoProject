@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
-import { View, Dimensions, ActivityIndicator, StyleSheet } from 'react-native'
+import { View, Dimensions, ActivityIndicator, StyleSheet, Switch, Text } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 
 import FlashMessage, { showMessage, hideMessage } from "react-native-flash-message";
 
-import {
-    LineChart,
-} from "react-native-chart-kit";
+import { LineChart } from "react-native-chart-kit";
 import { FadeInView } from './FadeInView';
+import CommonStyles from '../CommonStyles';
 
 const screenWidth = Dimensions.get("window").width;
 const chartConfig = {
@@ -26,7 +25,6 @@ const chartConfig = {
 
 
 export const Chart = props => {
-    const [showDots, setShowDots] = useState(false)
     const data = {
         labels: props.time,
         datasets: [
@@ -64,7 +62,7 @@ export const Chart = props => {
                         width={screenWidth * .95}
                         height={220}
                         chartConfig={chartConfig}
-                        withDots={showDots}
+                        withDots={props.withDots}
                         withVerticalLines={false}
                         verticalLabelRotation={90}
                         xLabelsOffset={-20}
@@ -98,4 +96,5 @@ const styles = StyleSheet.create({
     message: {
 
     },
+
 })
