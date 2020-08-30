@@ -3,79 +3,113 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, HeaderBackButton, CardStyleInterpolators } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import MenuAlarmes from './Screens/MenuAlarmes'
-import Grafico from './Screens/Grafico'
-import AddAlarm from './Screens/AddAlarm'
+import MenuAlarmes from './Screens/MenuAlarmes';
+import Grafico from './Screens/Grafico';
+import AddAlarm from './Screens/AddAlarm';
 import CommonStyles from './CommonStyles';
-// import { HeaderConfirm } from "./Component/HeaderConfirm";
+import MenuDrawer from './Component/MenuDrawer';
+import MenuAlarm from './Screens/MenuAlarmes';
+import SplashScreen from './Screens/SplashScreen';
+
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
-class AppDrawer extends Component {
+const drawerOptions = {
+    labelStyle: {
+        fontFamily: CommonStyles.fontFamily,
+        fontSize: 20,
+    },
+    itemStyle: {
+        borderBottomColor: CommonStyles.Colors.white,
+        borderBottomWidth: 1,
+    },
+    activeTintColor: CommonStyles.Colors.white,
+    inactiveTintColor: '#333',
+    activeBackgroundColor: 'transparent'
+}
+
+export default class App extends Component {
+    state = {
+        loadedScreen: false
+    }
+    componentDidMount = () => {
+        setTimeout(() => this.setState({ loadedScreen: true }), 3000)
+    }
     render() {
         return (
-            <Drawer.Navigator
-                initialRouteName="Cardapio"
-                //drawerContent={props => <MenuDrawer {...props} user={this.props.user} onSignOut={this.props.onSignOut} />}
-                //drawerContentOptions={drawerOptions}
-                backBehavior={'initialRoute'} >
-                <Drawer.Screen name="Cardapio" component={MenuAlarmes} backBehavior={'none'} />
-            </Drawer.Navigator>
+            <NavigationContainer>
+                <Stack.Navigator
+                    headerMode={'none'}
+                    initialRouteName='Alarmes'>
+                    {!this.state.loadedScreen ? <Stack.Screen name="SplashScreen" component={SplashScreen} /> :
+                        <Stack.Screen name="App" component={AppDrawer} />}
+                </Stack.Navigator>
+            </NavigationContainer >
         )
     }
 }
 
-export default class App extends Component {
+class AppDrawer extends Component {
     render() {
         return (
-            <NavigationContainer >
-                <Stack.Navigator
-                    mode={'card'}
-                    screenOptions={{
-                        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-                        headerTransparent: true,
-                        //animationEnabled: false,
-                        headerStyle: {
-                            height: 50,
-                            backgroundColor: 'black',
+
+            <Drawer.Navigator
+                initialRouteName="Alarmes"
+                drawerContent={props => <MenuDrawer {...props} />}
+                drawerContentOptions={drawerOptions}
+                backBehavior={'initialRoute'} >
+                <Drawer.Screen name="Alarmes" backBehavior={'none'}>
+                    {(props) => <AppStack  {...this.props} {...props} />}
+                </Drawer.Screen>
+            </Drawer.Navigator>
+
+        )
+    }
+}
+
+class AppStack extends Component {
+    render() {
+        return (
+            <Stack.Navigator
+                mode={'card'}
+                screenOptions={{
+                    cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                    headerTransparent: true,
+                    //animationEnabled: false,
+                    headerStyle: {
+                        height: 50,
+                        elevation: 0,
+                    },
+                    headerTintColor: CommonStyles.Colors.white,
+                }}
+                initialRouteName='Alarmes'>
+                <Stack.Screen name="Alarmes" component={MenuAlarm}
+                    options={({ route, navigation }) => ({
+                        headerTitleStyle: {
+                            fontFamily: CommonStyles.fontFamilyTitle,
+                            alignSelf: 'flex-start',
+                            fontSize: 20,
                         },
-                        headerTintColor: '#fff',
-                    }}
-                    initialRouteName='Alarmes'>
-                    <Stack.Screen name="Alarmes" component={MenuAlarmes}
-                        options={({ route }) => ({
-                            headerTitleStyle: {
-                                fontFamily: CommonStyles.fontFamilyTitle,
-                                alignSelf: 'flex-start',
-                                fontSize: 20,
-                            },
-                            headerLeft: (props) => (
-                                <HeaderBackButton
-                                    disabled={true}
-                                    tintColor={'rgba(0,0,0,0)'}
-                                />)
-                        })} />
-                    <Stack.Screen name="Grafico" component={Grafico}
-                        options={({ route }) => ({
-                            title: route.params.alarmName,
-                            headerTitleStyle: {
-                                fontFamily: CommonStyles.fontFamilyTitle,
-                                alignSelf: 'flex-start',
-                                fontSize: 20,
-                            },
-                        })}
-                    />
-                    <Stack.Screen name="AddAlarm" component={AddAlarm}
-                        options={({ route, navigation }) => ({
-                            title: "AddAlarm",
-                            headerTitleStyle: {
-                                fontFamily: CommonStyles.fontFamilyTitle,
-                                alignSelf: 'flex-start',
-                                fontSize: 20,
-                            },
-                        })} />
-                </Stack.Navigator>
-            </NavigationContainer >
+                    })} />
+                <Stack.Screen name="Grafico" component={Grafico}
+                    options={({ route }) => ({
+                        title: route.params.alarmName,
+                        headerTitleStyle: {
+                            fontFamily: CommonStyles.fontFamilyTitle,
+                            alignSelf: 'flex-start',
+                            fontSize: 20,
+                        },
+                    })} />
+                <Stack.Screen name="AddAlarm" component={AddAlarm}
+                    options={({ route, navigation }) => ({
+                        title: "Adicionar Alarme",
+                        headerTitleStyle: {
+                            fontFamily: CommonStyles.fontFamilyTitle,
+                            alignSelf: 'flex-start',
+                            fontSize: 20,
+                        },
+                    })} />
+            </Stack.Navigator>
         )
     }
 }

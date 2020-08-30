@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, FlatList, TouchableOpacity, Text, Alert, Animated, SafeAreaView, StatusBar, LogBox } from 'react-native'
+import { View, StyleSheet, TouchableOpacity, Text, Alert, Animated, SafeAreaView, StatusBar, LogBox, Button } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import * as dateFns from 'date-fns'
@@ -7,8 +7,8 @@ import AsyncStorage from '@react-native-community/async-storage'
 
 import { AlarmList } from '../Component/AlarmeList'
 import CommonStyles from '../CommonStyles'
-import LoaderComponent from '../Component/LoaderComponent'
 import SearchComponent from '../Component/SearchComponent'
+import { HeaderDrawerButton } from '../Component/HeaderDrawerButton';
 
 LogBox.ignoreAllLogs(true)
 
@@ -82,6 +82,11 @@ export default class MenuAlarm extends Component {
         } catch (e) {
             Alert.alert('Erro', 'Erro ao carregar list')
         }
+        this.props.navigation.setOptions({
+            headerLeft: () => (
+                <HeaderDrawerButton {...this.props} />
+            ),
+        });
     }
     onAddAlarme = async (start, end, idPrioridade, alarmeName, objectName, tipo, endWasSet) => {
         let id = Math.random() * 1000
@@ -148,6 +153,7 @@ export default class MenuAlarm extends Component {
         this.setState({ alarmes })
     }
     render() {
+
         const clampedScroll = Animated.diffClamp(
             Animated.add(
                 this.state.scrollYValue.interpolate({
