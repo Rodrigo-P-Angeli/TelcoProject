@@ -82,16 +82,23 @@ export default class Grafico extends Component {
                                     <Text style={[styles.text2, { textAlign: 'right' }]}>{this.props.route.params.end ? dateFns.format(this.props.route.params.end, 'dd-MM-yyyy HH:mm') : '- - -'}</Text>
                                 </View>
                             </View>
-                            <Switch
-                                trackColor={{ false: "#767577", true: "#81b0ff" }}
-                                thumbColor={this.state.withDots ? "#f5dd4b" : "#f4f3f4"}
-                                ios_backgroundColor="#3e3e3e"
-                                onValueChange={(value) => this.setState({ withDots: value })}
-                                value={this.state.withDots}
-                            />
-                            <Text style={styles.textSwitch}>Mostrar pontos</Text>
+                            <View style={{ alignSelf: 'flex-end' }}>
+                                <Switch
+                                    trackColor={{ false: "#767577", true: "#81b0ff" }}
+                                    thumbColor={this.state.withDots ? "#f5dd4b" : "#f4f3f4"}
+                                    ios_backgroundColor="#3e3e3e"
+                                    onValueChange={(value) => this.setState({ withDots: value })}
+                                    value={this.state.withDots}
+                                />
+                                <Text style={styles.textSwitch}>Mostrar pontos</Text>
+                            </View>
                         </FadeInView >}
-                    <Chart entrada={this.state.entrada} saida={this.state.saida} time={this.state.time} loading={this.state.loading} withDots={this.state.withDots} />
+                    <Chart
+                        entrada={this.state.entrada}
+                        saida={this.state.saida}
+                        time={this.state.time}
+                        loading={this.state.loading}
+                        withDots={this.state.withDots} />
                 </ScrollView>
             </LinearGradient >
         )
