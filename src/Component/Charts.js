@@ -1,27 +1,26 @@
-import React, { useState } from 'react'
-import { View, Dimensions, ActivityIndicator, StyleSheet, Switch, Text } from 'react-native'
-import LinearGradient from 'react-native-linear-gradient'
+import React from 'react'
+import { View, Dimensions, ActivityIndicator, StyleSheet } from 'react-native'
+import { LineChart } from "react-native-chart-kit"
+import FlashMessage, { showMessage, hideMessage } from "react-native-flash-message"
 
-import FlashMessage, { showMessage, hideMessage } from "react-native-flash-message";
+import { FadeInView } from './FadeInView'
+import CommonStyles from '../CommonStyles'
 
-import { LineChart } from "react-native-chart-kit";
-import { FadeInView } from './FadeInView';
-import CommonStyles from '../CommonStyles';
+const screenWidth = Dimensions.get("window").width
 
-const screenWidth = Dimensions.get("window").width;
 const chartConfig = {
     backgroundGradientFrom: "#1E2923",
     backgroundGradientFromOpacity: 0,
     backgroundGradientTo: "#08130D",
     backgroundGradientToOpacity: 0.5,
     color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
-    strokeWidth: 2, // optional, default 3
+    strokeWidth: 2,
     barPercentage: 0.5,
-    useShadowColorFromDataset: false, // optional
+    useShadowColorFromDataset: false,
     style: {
         paddingRight: 100,
     },
-};
+}
 
 
 export const Chart = props => {
@@ -30,21 +29,22 @@ export const Chart = props => {
         datasets: [
             {
                 data: props.entrada,
-                color: () => 'blue', // optional
-                strokeWidth: 2 // optional
+                color: () => CommonStyles.Colors.entrada,
+                strokeWidth: 2
             },
             {
                 data: props.saida,
-                color: () => 'green', // optional
-                strokeWidth: 2 // optional
+                color: () => CommonStyles.Colors.saida,
+                strokeWidth: 2
             }
         ],
-        legend: ["Entrada", "Saída"] // optional
-    };
+        legend: ["Entrada", "Saída"]
+    }
+
     if (props.loading) {
         return (
             <View style={styles.container}>
-                <ActivityIndicator animating={true} size={'large'} style={styles.ActInd} color={'white'} />
+                <ActivityIndicator animating={true} size={'large'} style={styles.ActInd} color={CommonStyles.Colors.white} />
             </View>
         )
     } else {
@@ -53,7 +53,6 @@ export const Chart = props => {
                 <View style={styles.view}>
                     <FlashMessage
                         position='bottom'
-                        style={[styles.message]}
                         floating={true}
                         hideStatusBar={false}
                     />
@@ -73,7 +72,7 @@ export const Chart = props => {
                                 message: 'Valor',
                                 description: `${value.toFixed(2).replace('.', ',')}`,
                                 backgroundColor: getColor(1),
-                                type: 'success'
+                                type: 'info'
                             })
                         }
                     />
@@ -93,8 +92,4 @@ const styles = StyleSheet.create({
     view: {
         alignItems: 'center',
     },
-    message: {
-
-    },
-
 })

@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, FlatList, TouchableOpacity, Text, TextInput, Modal, Alert, TouchableWithoutFeedback, Button } from 'react-native'
+import { View, StyleSheet, TouchableOpacity, Text, TextInput, Modal, TouchableWithoutFeedback } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import DatePicker from 'react-native-date-picker'
 import * as dateFns from 'date-fns'
 
-
 import CommonStyles from '../CommonStyles'
 import Prioridade from '../Prioridade'
 import { HeaderConfirm } from '../Component/HeaderConfirm'
-
 
 export default class AddAlarm extends Component {
     state = {
@@ -31,7 +29,11 @@ export default class AddAlarm extends Component {
     }
     render() {
         return (
-            <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#000066', '#47479F']} style={styles.linearGradient}>
+            <LinearGradient
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+                colors={['#000066', '#47479F']}
+                style={styles.linearGradient}>
                 <TextInput
                     style={styles.textInput}
                     placeholder={'Nome do Objeto'}
@@ -177,7 +179,6 @@ const styles = StyleSheet.create({
     viewPrioridade: {
         flexDirection: 'row',
         justifyContent: 'space-around',
-        //alignItems: 'center',
         flex: 1,
     },
     typeText: {

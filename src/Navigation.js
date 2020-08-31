@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator, HeaderBackButton, CardStyleInterpolators } from '@react-navigation/stack';
+import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import MenuAlarmes from './Screens/MenuAlarmes';
 import Grafico from './Screens/Grafico';
 import AddAlarm from './Screens/AddAlarm';
 import CommonStyles from './CommonStyles';
@@ -26,7 +25,7 @@ const drawerOptions = {
     activeTintColor: CommonStyles.Colors.white,
     inactiveTintColor: CommonStyles.Colors.white,
     activeBackgroundColor: '#47479F',
-    inactiveBackgroundColor: 'transparent'
+    inactiveBackgroundColor: 'transparent',
 }
 
 export default class App extends Component {
@@ -42,7 +41,8 @@ export default class App extends Component {
                 <Stack.Navigator
                     headerMode={'none'}
                     initialRouteName='Alarmes'>
-                    {!this.state.loadedScreen ? <Stack.Screen name="SplashScreen" component={SplashScreen} /> :
+                    {!this.state.loadedScreen ?
+                        <Stack.Screen name="SplashScreen" component={SplashScreen} /> :
                         <Stack.Screen name="App" component={AppDrawer} />}
                 </Stack.Navigator>
             </NavigationContainer >
@@ -58,10 +58,10 @@ class AppDrawer extends Component {
                 drawerContent={props => <MenuDrawer {...props} />}
                 drawerContentOptions={drawerOptions}
                 backBehavior={'initialRoute'} >
-                <Drawer.Screen name="Alarmes" backBehavior={'none'}>
+                <Drawer.Screen name="Alarmes">
                     {(props) => <AppStack  {...this.props} {...props} />}
                 </Drawer.Screen>
-                <Drawer.Screen name="Alarmes2" backBehavior={'none'}>
+                <Drawer.Screen name="Alarmes2">
                     {(props) => <AppStack  {...this.props} {...props} />}
                 </Drawer.Screen>
             </Drawer.Navigator>
@@ -79,7 +79,6 @@ class AppStack extends Component {
                     headerTransparent: true,
                     headerStyle: {
                         height: 50,
-                        elevation: 0,
                     },
                     headerTintColor: CommonStyles.Colors.white,
                 }}

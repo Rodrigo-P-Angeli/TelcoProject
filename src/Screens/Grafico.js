@@ -7,6 +7,7 @@ import { Chart } from '../Component/Charts'
 import { FadeInView } from '../Component/FadeInView'
 import CommonStyles from '../CommonStyles'
 import Prioridade from '../Prioridade'
+import { generatePoints, generateTime } from '../Functions/funcoes'
 
 LogBox.ignoreLogs([
     'Non-serializable values were found in the navigation state',
@@ -23,10 +24,10 @@ export default class Grafico extends Component {
     state = {
         ...initialState,
     }
-    async componentDidMount() {
-        let entrada = this.generatePoints(30)
-        let saida = this.generatePoints(40)
-        let time = this.generateTime()
+    componentDidMount() {
+        let entrada = generatePoints(30)
+        let saida = generatePoints(40)
+        let time = generateTime()
         setTimeout(() => this.setState({
             entrada,
             saida,
@@ -34,34 +35,19 @@ export default class Grafico extends Component {
             loading: false,
         }), 1);
     }
-    generatePoints(padrao) {
-        const dado = [padrao]
-        for (let i = 1; i < 288; i++) {
-            dado.push(dado[i - 1] + Math.round(Math.random() * 10 - 5)) //Criando um gráfico maneiro
-        }
-        return dado
-    }
-    generateTime() {
-        const dado = []
-        const date = new Date()
-        const coff = 1000 * 60 * 5
-        const agora = Math.round(date.getTime() / coff) * coff
-        for (let i = 0; i < 288; i++) {
-            if ((i + 32) % 32 == 0 || i == 287) {
-                let hora = dateFns.addHours(agora, -(288 - i) / 288 * 24)
-                dado[i] = dateFns.format(hora, 'HH:mm')
-            }
-        }
-        return dado
-    }
     render() {
         const { idPriority } = this.props.route.params
         return (
-            <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#000066', '#47479F']} style={styles.linearGradient}>
+            <LinearGradient
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+                colors={['#000066', '#47479F']}
+                style={styles.linearGradient}>
                 <ScrollView
                     style={styles.container}
                     showsVerticalScrollIndicator={false}>
-                    {this.state.loading ? null :
+                    {this.state.loading ?
+                        null :
                         <FadeInView>
                             <View style={[styles.prioridadeView, { backgroundColor: Prioridade[idPriority].background_color }]}>
                                 <Text style={[styles.prioridade, { color: Prioridade[idPriority].text_color }]}>

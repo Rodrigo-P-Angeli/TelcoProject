@@ -2,58 +2,17 @@ import React, { Component } from 'react'
 import { View, StyleSheet, TouchableOpacity, Text, Alert, Animated, SafeAreaView, StatusBar, LogBox, Button } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import * as dateFns from 'date-fns'
 import AsyncStorage from '@react-native-community/async-storage'
+import FlashMessage, { showMessage } from "react-native-flash-message";
 
 import { AlarmList } from '../Component/AlarmeList'
 import CommonStyles from '../CommonStyles'
 import SearchComponent from '../Component/SearchComponent'
 import { HeaderDrawerButton } from '../Component/HeaderDrawerButton';
+import { alarmes } from '../ListaAlarmesInicial'
 
 LogBox.ignoreAllLogs(true)
 
-const alarmes = [
-    {
-        idAlarm: 0,
-        idObject: 0,
-        start: dateFns.addHours(new Date(), Math.random() * 10000 - 5000),
-        end: dateFns.addHours(new Date(), Math.random() * 10000 - 5000),
-        idPriority: 0,
-        alarmName: 'Alarme1',
-        objectName: 'Objeto1',
-        type: 'Dispositivo',
-    },
-    {
-        idAlarm: 1,
-        idObject: 1,
-        start: dateFns.addHours(new Date(), Math.random() * 10000 - 5000),
-        end: dateFns.addHours(new Date(), Math.random() * 10000 - 5000),
-        idPriority: 1,
-        alarmName: 'Alarme2',
-        objectName: 'Objeto1',
-        type: 'Dispositivo',
-    },
-    {
-        idAlarm: 2,
-        idObject: 2,
-        start: dateFns.addHours(new Date(), Math.random() * 10000 - 5000),
-        end: dateFns.addHours(new Date(), Math.random() * 10000 - 5000),
-        idPriority: 2,
-        alarmName: 'Alarme3',
-        objectName: 'Objeto1',
-        type: 'Dispositivo',
-    },
-    {
-        idAlarm: 3,
-        idObject: 3,
-        start: dateFns.addHours(new Date(), Math.random() * 10000 - 5000),
-        end: dateFns.addHours(new Date(), (Math.random() * 10000) - 5000),
-        idPriority: 3,
-        alarmName: 'Alarme4',
-        objectName: 'Objeto1',
-        type: 'Dispositivo',
-    },
-]
 export default class MenuAlarm extends Component {
     state = {
         scrollYValue: new Animated.Value(0),
@@ -77,7 +36,14 @@ export default class MenuAlarm extends Component {
                 alarmes.sort((a, b) => b.start - a.start)
                 this.setState({ alarmes, alarmeTotal: alarmes })
             } else {
+                alarmes.sort((a, b) => b.start - a.start)
                 this.setState({ alarmes, alarmeTotal: alarmes })
+                try {
+                    let listaAlarmes = JSON.stringify(alarmes)
+                    await AsyncStorage.setItem('ListaAlarmes', listaAlarmes)
+                } catch (e) {
+                    Alert.alert('Erro', 'Não conseguimos salvar seus alarmes no banco de dados,')
+                }
             }
         } catch (e) {
             Alert.alert('Erro', 'Erro ao carregar list')
@@ -119,6 +85,14 @@ export default class MenuAlarm extends Component {
         try {
             let listaAlarmes = JSON.stringify(this.state.alarmeTotal)
             await AsyncStorage.setItem('ListaAlarmes', listaAlarmes)
+            showMessage(
+                {
+                    message: 'Alarme adicionado com sucesso',
+                    description: `${alarmeName} foi adicionado`,
+                    backgroundColor: '#333',
+                    type: 'info'
+                }
+            )
         } catch (e) {
             Alert.alert('Erro', 'Erro ao salvar lista')
         }
@@ -135,6 +109,13 @@ export default class MenuAlarm extends Component {
         try {
             let listaAlarmes = JSON.stringify(this.state.alarmeTotal)
             await AsyncStorage.setItem('ListaAlarmes', listaAlarmes)
+            showMessage(
+                {
+                    message: 'Alarme Deletado com sucesso',
+                    backgroundColor: '#333',
+                    type: 'info'
+                }
+            )
         } catch (e) {
             Alert.alert('Erro', 'Erro ao deletar item')
         }
@@ -153,7 +134,6 @@ export default class MenuAlarm extends Component {
         this.setState({ alarmes })
     }
     render() {
-
         const clampedScroll = Animated.diffClamp(
             Animated.add(
                 this.state.scrollYValue.interpolate({
@@ -169,6 +149,11 @@ export default class MenuAlarm extends Component {
         return (
             <Animated.View>
                 <StatusBar barStyle="dark-content" />
+                <FlashMessage
+                    position='bottom'
+                    floating={true}
+                    hideStatusBar={false}
+                />
                 <SafeAreaView>
                     <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#000066', '#47479F']} style={styles.linearGradient}>
                         <SearchComponent
