@@ -1,7 +1,7 @@
 # TelcoProject
  Projeto React Native para processo seletivo da vaga de Desenvolvedor de Software (Mobile) na empresa Telcomanager
 
-Antes de tudo, um breve recado sobre minha trajetória na programação em React Native. Comecei a criar App em React Native na primeira semana de abril do ano de 2020 quando se iniciou a quarentena e estava desempregado quando tive vontade de começar uma nova conquista. Assim hoje fazem aproximados 5 meses que desde que comecei. Como sou formado em engenharia mecânica, nunca havia estudado a fundo React Native, JavaScript, Node.js, Firebase, etc. Então todo conhecimento que tenho foram adquiridos nestes 5 meses, desta forma pode ser que o código não esteja organizado de maneira muito comum das boas práticas de programação, mas sou pessoa que se adapta facilmente, e não seria nenhum problema me adequar às boas práticas da empresa.
+Antes de tudo, um breve recado sobre minha trajetória na programação em React Native. Comecei a criar App em React Native na primeira semana de abril do ano de 2020 quando se iniciou a quarentena e estava desempregado quando tive vontade de começar uma nova conquista. Assim hoje fazem aproximados 5 meses que desde que comecei. Como sou formado em engenharia mecânica, nunca havia estudado a fundo React Native, JavaScript, Node.js, Firebase, etc. Então todo conhecimento que tenho foram adquiridos nestes 5 meses, desta forma pode ser que o código não esteja organizado de maneira muito comum das boas práticas de programação, mas aprendo rápido e não seria nenhum problema me adequar às boas práticas da empresa.
 
 ### Instalação
 **O projeto desenvolvido em _React Native_.**
