@@ -21,11 +21,12 @@ const drawerOptions = {
     },
     itemStyle: {
         borderBottomColor: CommonStyles.Colors.white,
-        borderBottomWidth: 1,
+        borderBottomWidth: 0.5,
     },
     activeTintColor: CommonStyles.Colors.white,
-    inactiveTintColor: '#333',
-    activeBackgroundColor: 'transparent'
+    inactiveTintColor: CommonStyles.Colors.white,
+    activeBackgroundColor: '#47479F',
+    inactiveBackgroundColor: 'transparent'
 }
 
 export default class App extends Component {
@@ -33,7 +34,7 @@ export default class App extends Component {
         loadedScreen: false
     }
     componentDidMount = () => {
-        setTimeout(() => this.setState({ loadedScreen: true }), 3000)
+        setTimeout(() => this.setState({ loadedScreen: true }), 2000)
     }
     render() {
         return (
@@ -52,7 +53,6 @@ export default class App extends Component {
 class AppDrawer extends Component {
     render() {
         return (
-
             <Drawer.Navigator
                 initialRouteName="Alarmes"
                 drawerContent={props => <MenuDrawer {...props} />}
@@ -61,8 +61,10 @@ class AppDrawer extends Component {
                 <Drawer.Screen name="Alarmes" backBehavior={'none'}>
                     {(props) => <AppStack  {...this.props} {...props} />}
                 </Drawer.Screen>
+                <Drawer.Screen name="Alarmes2" backBehavior={'none'}>
+                    {(props) => <AppStack  {...this.props} {...props} />}
+                </Drawer.Screen>
             </Drawer.Navigator>
-
         )
     }
 }
@@ -75,7 +77,6 @@ class AppStack extends Component {
                 screenOptions={{
                     cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
                     headerTransparent: true,
-                    //animationEnabled: false,
                     headerStyle: {
                         height: 50,
                         elevation: 0,
