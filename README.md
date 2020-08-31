@@ -5,6 +5,7 @@ Antes de tudo, um breve recado sobre minha trajetória na programação em React
 
 ### Instalação
 **O projeto desenvolvido em _React Native_.**
+
 **OBS.:** Antes uma breve observação, meu computador é windows e eu não consigo rodar "react-native run-ios" em minha máquina, logo eu não sou capaz de testar a aplicação em ios, olhei na internet como fazer mas não achei ninguém falando que era possível, infelizmente meu computador é muito fraco e não consigo emular macOS, então peço desculpas, imagino que algumas bibliotecas não esteja funcionando corretamente pois não consigo rodar "pod install".
 
  ***Metodo 1:***
