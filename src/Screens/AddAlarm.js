@@ -23,7 +23,7 @@ export default class AddAlarm extends Component {
     componentDidMount() {
         this.props.navigation.setOptions({
             headerRight: () => (
-                <HeaderConfirm {...this.props} addAlarm={() => this.props.route.params.addalarm(this.state.start, this.state.end, this.state.priority, this.state.alarmName, this.state.objectName, this.state.type, this.state.endWasSet)} />
+                <HeaderConfirm {...this.props} addAlarm={() => this.props.route.params.addalarm(this.state.start/1000, this.state.end/1000, this.state.priority, this.state.alarmName, this.state.objectName, this.state.type, this.state.endWasSet)} />
             ),
         });
     }
@@ -111,7 +111,7 @@ export default class AddAlarm extends Component {
                             </View>
                         </TouchableWithoutFeedback>
                         <DatePicker
-                            date={this.state.start}
+                            date={this.state.end}
                             onDateChange={(end) => this.setState({ end, endWasSet: true })}
                             mode={'datetime'}
                             locale={'pt-br'}

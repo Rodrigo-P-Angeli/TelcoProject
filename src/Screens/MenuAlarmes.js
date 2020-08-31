@@ -23,16 +23,6 @@ export default class MenuAlarm extends Component {
             let alarmes2 = await AsyncStorage.getItem('ListaAlarmes')
             if (alarmes2 !== null) {
                 let alarmes = JSON.parse(alarmes2)
-                alarmes.map(item => {
-                    item.start = new Date(item.start)
-                    if (item.end) {
-                        item.end = new Date(item.end)
-                    }
-                    return (
-                        item
-                    )
-                }
-                )
                 alarmes.sort((a, b) => b.start - a.start)
                 this.setState({ alarmes, alarmeTotal: alarmes })
             } else {
@@ -155,7 +145,11 @@ export default class MenuAlarm extends Component {
                     hideStatusBar={false}
                 />
                 <SafeAreaView>
-                    <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} colors={['#000066', '#47479F']} style={styles.linearGradient}>
+                    <LinearGradient
+                        start={{ x: 0, y: 0 }}
+                        end={{ x: 1, y: 0 }}
+                        colors={['#000066', '#47479F']}
+                        style={styles.linearGradient}>
                         <SearchComponent
                             clampedScroll={clampedScroll}
                             searchFilter={this.searchFilterFunction} />

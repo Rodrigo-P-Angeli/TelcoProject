@@ -20,11 +20,9 @@ export const AlarmList = props => {
                 <View style={[styles.prioridade, { backgroundColor: Prioridade[props.idPriority].background_color }]}></View>
                 <Text style={[styles.text, { color: Prioridade[props.idPriority].text_color }]}>{props.alarmName}</Text>
                 <View style={styles.startEnd}>
-                    <Text style={[styles.startEndText, { color: Prioridade[props.idPriority].text_color }]}>Start: {dateFns.format(props.start, 'dd-MM-yyyy HH:mm')}</Text>
-                    <Text style={[styles.startEndText, { color: Prioridade[props.idPriority].text_color }]}>End: {props.end ? dateFns.format(props.end, 'dd-MM-yyyy HH:mm') : '   - - -'}</Text>
+                    <Text style={[styles.startEndText, { color: Prioridade[props.idPriority].text_color }]}>Start: {dateFns.format(props.start * 1000, 'dd-MM-yyyy HH:mm')}</Text>
+                    <Text style={[styles.startEndText, { color: Prioridade[props.idPriority].text_color }]}>End: {props.end ? dateFns.format(props.end * 1000, 'dd-MM-yyyy HH:mm') : '   - - -'}</Text>
                 </View>
-                {/* 
-            <Text>{props.type}</Text> */}
             </TouchableOpacity>
         </FadeInView>
     )

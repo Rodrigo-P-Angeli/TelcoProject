@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, LogBox, View, Text, Dimensions, ScrollView, Switch, ActivityIndicator } from 'react-native'
+import { StyleSheet, LogBox, View, Text, Dimensions, ScrollView, Switch } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import * as dateFns from 'date-fns'
 
@@ -63,9 +63,9 @@ export default class Grafico extends Component {
                                 </View>
                                 <View style={styles.viewInfoDate}>
                                     <Text style={[styles.text, { textAlign: 'right' }]}>Data de início:</Text>
-                                    <Text style={[styles.text2, { textAlign: 'right' }]}>{dateFns.format(this.props.route.params.start, 'dd-MM-yyyy HH:mm')}</Text>
+                                    <Text style={[styles.text2, { textAlign: 'right' }]}>{dateFns.format(this.props.route.params.start * 1000, 'dd-MM-yyyy HH:mm')}</Text>
                                     <Text style={[styles.text, { textAlign: 'right' }]}>Data de término: </Text>
-                                    <Text style={[styles.text2, { textAlign: 'right' }]}>{this.props.route.params.end ? dateFns.format(this.props.route.params.end, 'dd-MM-yyyy HH:mm') : '- - -'}</Text>
+                                    <Text style={[styles.text2, { textAlign: 'right' }]}>{this.props.route.params.end ? dateFns.format(this.props.route.params.end * 1000, 'dd-MM-yyyy HH:mm') : '- - -'}</Text>
                                 </View>
                             </View>
                             <View style={{ alignSelf: 'flex-end' }}>
