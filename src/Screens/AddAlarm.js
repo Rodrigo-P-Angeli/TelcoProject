@@ -93,6 +93,7 @@ export default class AddAlarm extends Component {
                             mode={'datetime'}
                             locale={'pt-br'}
                             textColor={'white'}
+                            maximumDate={new Date()}
                             style={styles.datePicker}
                         />
                         <TouchableWithoutFeedback onPress={() => this.setState({ openStart: false })} style={styles.touchableModal}>
@@ -116,6 +117,7 @@ export default class AddAlarm extends Component {
                             mode={'datetime'}
                             locale={'pt-br'}
                             textColor={'white'}
+                            maximumDate={new Date()}
                             style={styles.datePicker}
                         />
                         <TouchableWithoutFeedback onPress={() => this.setState({ openEnd: false })} style={styles.touchableModal}>

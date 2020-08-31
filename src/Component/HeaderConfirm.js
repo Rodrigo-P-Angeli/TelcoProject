@@ -14,7 +14,7 @@ export class HeaderConfirm extends Component {
                 onPress={(a, b, c, d, e, f, g) => {
                     this.setState({ disable: true })
                     this.props.addAlarm(a, b, c, d, e, f, g)
-                    this.props.navigation.navigate('Alarmes')
+                    this.props.navigation.navigate('Lista de Objetos')
                 }}>
                 <FontAwesome name={'check'} color={'white'} size={20} />
             </TouchableOpacity>

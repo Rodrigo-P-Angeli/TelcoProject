@@ -56,11 +56,11 @@ class AppDrawer extends Component {
     render() {
         return (
             <Drawer.Navigator
-                initialRouteName="Alarmes"
+                initialRouteName="Lista"
                 drawerContent={props => <MenuDrawer {...props} />}
                 drawerContentOptions={drawerOptions}
                 backBehavior={'initialRoute'} >
-                <Drawer.Screen name="Alarmes">
+                <Drawer.Screen name="Lista">
                     {(props) => <AppStack  {...this.props} {...props} />}
                 </Drawer.Screen>
             </Drawer.Navigator>
@@ -81,8 +81,8 @@ class AppStack extends Component {
                     },
                     headerTintColor: CommonStyles.Colors.white,
                 }}
-                initialRouteName='Alarmes'>
-                <Stack.Screen name="Alarmes" component={MenuAlarm}
+                initialRouteName='Lista de Objetos'>
+                <Stack.Screen name="Lista de Objetos" component={MenuAlarm}
                     options={({ route, navigation }) => ({
                         headerTitleStyle: {
                             fontFamily: CommonStyles.fontFamilyTitle,
