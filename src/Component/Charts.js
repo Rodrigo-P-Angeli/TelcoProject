@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Dimensions, ActivityIndicator, StyleSheet } from 'react-native'
 import { LineChart } from "react-native-chart-kit"
-import FlashMessage, { showMessage, hideMessage } from "react-native-flash-message"
+import { showMessage } from "react-native-flash-message"
 
 import { FadeInView } from './FadeInView'
 import CommonStyles from '../CommonStyles'
@@ -51,11 +51,6 @@ export const Chart = props => {
         return (
             <FadeInView>
                 <View style={styles.view}>
-                    <FlashMessage
-                        position='bottom'
-                        floating={true}
-                        hideStatusBar={false}
-                    />
                     <LineChart
                         data={data}
                         width={screenWidth * .95}

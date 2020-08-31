@@ -3,7 +3,7 @@ import { View, StyleSheet, TouchableOpacity, Text, Alert, Animated, SafeAreaView
 import LinearGradient from 'react-native-linear-gradient'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import AsyncStorage from '@react-native-community/async-storage'
-import FlashMessage, { showMessage } from "react-native-flash-message";
+import { showMessage } from "react-native-flash-message";
 
 import { AlarmList } from '../Component/AlarmeList'
 import CommonStyles from '../CommonStyles'
@@ -139,11 +139,6 @@ export default class MenuAlarm extends Component {
         return (
             <Animated.View>
                 <StatusBar barStyle="dark-content" />
-                <FlashMessage
-                    position='bottom'
-                    floating={true}
-                    hideStatusBar={false}
-                />
                 <SafeAreaView>
                     <LinearGradient
                         start={{ x: 0, y: 0 }}

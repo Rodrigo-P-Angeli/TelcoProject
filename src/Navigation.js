@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack'
 import { createDrawerNavigator } from '@react-navigation/drawer'
+import FlashMessage from 'react-native-flash-message'
 
 import Grafico from './Screens/Grafico'
 import AddAlarm from './Screens/AddAlarm'
@@ -41,6 +42,11 @@ export default class App extends Component {
                         <Stack.Screen name="SplashScreen" component={SplashScreen} /> :
                         <Stack.Screen name="App" component={AppDrawer} />}
                 </Stack.Navigator>
+                <FlashMessage
+                    position='bottom'
+                    floating={true}
+                    hideStatusBar={false}
+                />
             </NavigationContainer >
         )
     }

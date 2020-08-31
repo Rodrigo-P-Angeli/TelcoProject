@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, Image, StyleSheet } from 'react-native'
 import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer'
-import { HeaderBackButton } from '@react-navigation/stack';
+import { HeaderBackButton } from '@react-navigation/stack'
 import Email from 'react-native-vector-icons/MaterialCommunityIcons'
 import LinearGradient from 'react-native-linear-gradient'
 
@@ -63,9 +63,9 @@ const styles = StyleSheet.create({
         color: CommonStyles.Colors.white,
     },
     container: {
-        paddingBottom: 10,
-        borderBottomColor: CommonStyles.Colors.white,
-        borderBottomWidth: 1,
+        paddingBottom: 20,
+        // borderBottomColor: CommonStyles.Colors.white,
+        // borderBottomWidth: 1,
     },
     itens: {
         flexDirection: 'row',

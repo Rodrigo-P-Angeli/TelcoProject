@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
