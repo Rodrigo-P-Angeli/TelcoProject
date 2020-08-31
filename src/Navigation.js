@@ -1,26 +1,22 @@
-import React, { Component } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import React, { Component } from 'react'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack'
+import { createDrawerNavigator } from '@react-navigation/drawer'
 
-import Grafico from './Screens/Grafico';
-import AddAlarm from './Screens/AddAlarm';
-import CommonStyles from './CommonStyles';
-import MenuDrawer from './Component/MenuDrawer';
-import MenuAlarm from './Screens/MenuAlarmes';
-import SplashScreen from './Screens/SplashScreen';
+import Grafico from './Screens/Grafico'
+import AddAlarm from './Screens/AddAlarm'
+import CommonStyles from './CommonStyles'
+import MenuDrawer from './Component/MenuDrawer'
+import MenuAlarm from './Screens/MenuAlarmes'
+import SplashScreen from './Screens/SplashScreen'
 
-const Stack = createStackNavigator();
-const Drawer = createDrawerNavigator();
+const Stack = createStackNavigator()
+const Drawer = createDrawerNavigator()
 
 const drawerOptions = {
     labelStyle: {
         fontFamily: CommonStyles.fontFamily,
         fontSize: 20,
-    },
-    itemStyle: {
-        borderBottomColor: CommonStyles.Colors.white,
-        borderBottomWidth: 0.5,
     },
     activeTintColor: CommonStyles.Colors.white,
     inactiveTintColor: CommonStyles.Colors.white,
@@ -59,9 +55,6 @@ class AppDrawer extends Component {
                 drawerContentOptions={drawerOptions}
                 backBehavior={'initialRoute'} >
                 <Drawer.Screen name="Alarmes">
-                    {(props) => <AppStack  {...this.props} {...props} />}
-                </Drawer.Screen>
-                <Drawer.Screen name="Alarmes2">
                     {(props) => <AppStack  {...this.props} {...props} />}
                 </Drawer.Screen>
             </Drawer.Navigator>

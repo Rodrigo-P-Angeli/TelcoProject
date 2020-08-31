@@ -167,7 +167,6 @@ export default class MenuAlarm extends Component {
                             onScroll={Animated.event(
                                 [{ nativeEvent: { contentOffset: { y: this.state.scrollYValue } } }],
                                 { useNativeDriver: true },
-                                () => { },          // Optional async listener but I didn't use.
                             )}
                             contentInsetAdjustmentBehavior='never'>
                             <View style={{ marginTop: 60, }}></View>
