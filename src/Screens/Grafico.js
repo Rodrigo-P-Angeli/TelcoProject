@@ -58,7 +58,7 @@ export default class Grafico extends Component {
                                 <View style={styles.viewInfo}>
                                     <Text style={styles.text}>Nome do objeto:</Text>
                                     <Text style={styles.text2}>{this.props.route.params.objectName}</Text>
-                                    <Text style={styles.text}>Tipo do alarme:</Text>
+                                    <Text style={styles.text}>Tipo do objeto:</Text>
                                     <Text style={styles.text2}>{this.props.route.params.type}</Text>
                                 </View>
                                 <View style={styles.viewInfoDate}>
