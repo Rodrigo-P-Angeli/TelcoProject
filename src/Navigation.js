@@ -87,7 +87,7 @@ class AppStack extends Component {
                         headerTitleStyle: {
                             fontFamily: CommonStyles.fontFamilyTitle,
                             alignSelf: 'flex-start',
-                            fontSize: 20,
+                            fontSize: CommonStyles.headerFontSize,
                         },
                     })} />
                 <Stack.Screen name="Grafico" component={Grafico}
@@ -96,7 +96,7 @@ class AppStack extends Component {
                         headerTitleStyle: {
                             fontFamily: CommonStyles.fontFamilyTitle,
                             alignSelf: 'flex-start',
-                            fontSize: 20,
+                            fontSize: CommonStyles.headerFontSize,
                         },
                     })} />
                 <Stack.Screen name="AddAlarm" component={AddAlarm}
@@ -105,7 +105,7 @@ class AppStack extends Component {
                         headerTitleStyle: {
                             fontFamily: CommonStyles.fontFamilyTitle,
                             alignSelf: 'flex-start',
-                            fontSize: 20,
+                            fontSize: CommonStyles.headerFontSize,
                         },
                     })} />
             </Stack.Navigator>
