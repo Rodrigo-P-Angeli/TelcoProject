@@ -1,0 +1,1 @@
+keytool -genkeypair -v -keystore telcomanager-key.keystore -alias telcomanager-alias -keyalg RSA -keysize 2048 -validity 10000
